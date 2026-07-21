@@ -1,1 +1,26 @@
-<p>header works!</p>
+<header [class.scrolled]="isScrolled()">
+  <div class="container navbar">
+    <a routerLink="/" class="logo">
+      <img src="/Axione_Logo.png" alt="Axione Solutions" />
+    </a>
+
+    <nav class="nav-menu" [class.active]="mobileMenuOpen()">
+      @for (item of navItems; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+          (click)="closeMenu()"
+        >
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="header-actions">
+      <a routerLink="/contact" class="btn btn-primary"> Get Started </a>
+
+      <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+    </div>
+  </div>
+</header>
