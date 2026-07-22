@@ -1,0 +1,75 @@
+.page-banner {
+  padding: 180px 0 100px;
+
+  background:
+    linear-gradient(135deg, rgba(106, 17, 203, 0.95), rgba(123, 47, 247, 0.9)),
+    url('/about.png') center/cover no-repeat;
+
+  color: #fff;
+
+  text-align: center;
+}
+
+.page-banner .section-badge {
+  background: rgba(255, 255, 255, 0.15);
+
+  color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  margin-bottom: 20px;
+}
+
+.page-banner h1 {
+  max-width: 850px;
+
+  margin: 0 auto 25px;
+
+  color: #fff;
+}
+
+.page-banner p {
+  max-width: 720px;
+
+  margin: auto;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  line-height: 1.8;
+}
+// about-company
+.about-company {
+  padding: var(--section-space) 0;
+
+  background: var(--surface);
+}
+
+.about-company-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  align-items: center;
+
+  gap: 70px;
+}
+
+.about-company-image img {
+  width: 100%;
+
+  border-radius: var(--radius-xl);
+
+  box-shadow: var(--shadow-lg);
+}
+
+.about-company-content h2 {
+  margin: 20px 0;
+}
+
+.about-company-content p {
+  color: var(--text-light);
+
+  line-height: 1.9;
+
+  margin-bottom: 20px;
+}

@@ -86,7 +86,8 @@ header.scrolled {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: x-large;
+    font-size: 30px;
+    color: var(--primary);
   }
 
   .header-actions .btn {
