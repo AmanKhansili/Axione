@@ -159,6 +159,12 @@ footer {
   .footer-about p {
     max-width: 100%;
   }
+  .footer-about img {
+    justify-self: center;
+  }
+  .social-links {
+    justify-self: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -215,6 +221,7 @@ footer {
 
   .footer-about img {
     max-width: 160px;
+    justify-self: center;
   }
 
   .footer-about p {

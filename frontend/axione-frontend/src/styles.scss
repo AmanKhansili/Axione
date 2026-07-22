@@ -139,6 +139,18 @@ section {
   color: #fff;
 }
 
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: var(--radius-round);
+  background: rgba(106, 17, 203, 0.08);
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  // margin-bottom: 20px;
+}
+
 .p0 {
   padding: 0;
 }
@@ -149,9 +161,9 @@ section {
   padding-bottom: 0;
 }
 
-.mr0 {
-  margin: 0 !important;
-}
+// .mr0 {
+//   margin: 0 !important;
+// }
 .mt0 {
   margin-top: 0;
 }
