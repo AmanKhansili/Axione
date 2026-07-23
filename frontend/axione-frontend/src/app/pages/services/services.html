@@ -1,29 +1,38 @@
 <section class="service-hero">
   <div class="container">
     <div class="service-left">
-      <span class="section-badge"> OUR SERVICES </span>
+      <span class="section-badge"> DIGITAL SOLUTIONS </span>
 
       <h1>
-        Smart Digital
-        <span>Solutions</span>
-        For Modern Businesses
+        Transforming Businesses
+        <span>Through Technology</span>
       </h1>
 
       <p>
-        We deliver innovative software development, cloud solutions, web applications, and digital
-        marketing services that help businesses accelerate growth and stay ahead in today's
-        competitive digital landscape.
+        We help businesses innovate, automate, and grow with cutting-edge digital solutions. From
+        custom web development and AI-powered automation to UI/UX design and digital marketing, our
+        team delivers scalable solutions that drive measurable business success.
       </p>
 
       <div class="hero-feature">
         <div>
           <i class="ri-checkbox-circle-fill"></i>
-          Software & Web Development
+          Web Development
         </div>
 
         <div>
           <i class="ri-checkbox-circle-fill"></i>
-          Cloud Solutions
+          Agentic AI Solutions
+        </div>
+
+        <div>
+          <i class="ri-checkbox-circle-fill"></i>
+          AI Automation
+        </div>
+
+        <div>
+          <i class="ri-checkbox-circle-fill"></i>
+          UI/UX Design
         </div>
 
         <div>
@@ -37,121 +46,220 @@
         </div>
       </div>
 
-      <a routerLink="/contact" class="btn btn-primary"> Get Free Consultation </a>
+      <div class="hero-buttons">
+        <a routerLink="/contact" class="btn btn-primary"> Get Free Consultation </a>
+
+        <a class="btn btn-secondary" (click)="scrollToServices(); $event.preventDefault()">
+          Explore Services
+        </a>
+      </div>
     </div>
 
     <div class="service-right">
-      <img src="/our-services.png" alt="Our Services" />
+      <img src="/our-services.png" alt="Digital Solutions" />
     </div>
   </div>
 </section>
 
-<section class="web-programming section">
+<section class="services section" id="services">
   <div class="container">
-    <div class="web-image">
-      <img src="web-programming.png" alt="Web Programming" />
-    </div>
-
-    <div class="web-content">
-      <span class="section-badge"> WEB PROGRAMMING </span>
-
-      <h1>Professional Web Programming Services</h1>
-
+    <div class="section-title">
+      <span class="section-badge">OUR SERVICES</span>
+      <h2>Technology Solutions Designed For Growth</h2>
       <p>
-        We build modern, responsive, and scalable web applications using the latest technologies to
-        deliver secure, high-performance, and business-focused digital solutions tailored to your
-        requirements.
+        We provide end-to-end digital solutions that help businesses innovate, automate, and grow.
       </p>
+    </div>
+    <div class="services-grid">
+      <!-- Web Development -->
+      <div class="service-card">
+        <i class="ri-code-box-line service-icon"></i>
 
-      <div class="tech-list">
-        <div class="tech-item">
-          <i class="ri-html5-line"></i>
-          <span>HTML</span>
-        </div>
+        <h3>Web Development</h3>
 
-        <div class="tech-item">
-          <i class="ri-css3-line"></i>
-          <span>CSS</span>
-        </div>
+        <p>
+          We build modern, responsive, and scalable web applications that deliver exceptional user
+          experiences.
+        </p>
 
-        <div class="tech-item">
-          <i class="ri-code-box-line"></i>
-          <span>PHP Development</span>
-        </div>
+        <ul>
+          <li>Corporate Websites</li>
+          <li>E-Commerce Solutions</li>
+          <li>Custom Web Applications</li>
+          <li>API Integration</li>
+        </ul>
 
-        <div class="tech-item">
-          <i class="ri-javascript-line"></i>
-          <span>JavaScript</span>
-        </div>
+        <button class="btn btn-outline service-btn" (click)="openModal('Web Development')">
+          explore service <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
 
-        <div class="tech-item">
-          <i class="ri-nodejs-line"></i>
-          <span>Node.js</span>
-        </div>
+      <!-- Agentic AI -->
 
-        <div class="tech-item">
-          <i class="ri-links-line"></i>
-          <span>REST API Development</span>
-        </div>
+      <div class="service-card">
+        <i class="ri-robot-2-line service-icon"></i>
+
+        <h3>Agentic AI</h3>
+
+        <p>
+          Intelligent AI agents designed to automate decisions, customer engagement, and business
+          operations.
+        </p>
+
+        <ul>
+          <li>AI Business Agents</li>
+          <li>Customer Support Bots</li>
+          <li>Multi-Agent Systems</li>
+          <li>AI Virtual Assistants</li>
+        </ul>
+
+        <button class="btn btn-outline service-btn" (click)="openModal('Agentic AI')">
+          explore service <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+
+      <!-- AI Automation -->
+
+      <div class="service-card">
+        <i class="ri-cpu-line service-icon"></i>
+
+        <h3>AI Automation</h3>
+
+        <p>
+          Streamline repetitive workflows and improve productivity with intelligent automation
+          solutions.
+        </p>
+
+        <ul>
+          <li>Workflow Automation</li>
+          <li>CRM Automation</li>
+          <li>Email Automation</li>
+          <li>Business Process Automation</li>
+        </ul>
+
+        <button class="btn btn-outline service-btn" (click)="openModal('AI Automation')">
+          explore service <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+
+      <!-- Digital Marketing -->
+
+      <div class="service-card">
+        <i class="ri-megaphone-line service-icon"></i>
+
+        <h3>Digital Marketing</h3>
+
+        <p>
+          Data-driven marketing strategies that help businesses increase visibility, traffic, and
+          conversions.
+        </p>
+
+        <ul>
+          <li>SEO Optimization</li>
+          <li>Google Ads</li>
+          <li>Social Media Marketing</li>
+          <li>Analytics & Reporting</li>
+        </ul>
+
+        <button class="btn btn-outline service-btn" (click)="openModal('Digital Marketing')">
+          explore service <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+
+      <!-- Support -->
+
+      <div class="service-card">
+        <i class="ri-customer-service-2-line service-icon"></i>
+
+        <h3>Support & Maintenance</h3>
+
+        <p>
+          Keep your applications secure, optimized, and running smoothly with continuous technical
+          support.
+        </p>
+
+        <ul>
+          <li>Software Maintenance</li>
+          <li>Performance Optimization</li>
+          <li>Bug Fixes</li>
+          <li>Technical Support</li>
+        </ul>
+
+        <button class="btn btn-outline service-btn" (click)="openModal('Support & Maintenance')">
+          explore service <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+
+      <!-- UI/UX -->
+
+      <div class="service-card">
+        <i class="ri-layout-4-line service-icon"></i>
+
+        <h3>UI/UX Design</h3>
+
+        <p>
+          Create intuitive, engaging, and visually appealing digital experiences focused on user
+          satisfaction.
+        </p>
+
+        <ul>
+          <li>User Research</li>
+          <li>Wireframing</li>
+          <li>UI Design</li>
+          <li>Interactive Prototypes</li>
+        </ul>
+
+        <button class="btn btn-outline service-btn" (click)="openModal('UI/UX Design')">
+          explore service <i class="ri-arrow-right-line"></i>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<section class="digital-marketing section">
+<section class="why-us section">
   <div class="container">
-    <div class="marketing-content">
-      <span class="section-badge"> DIGITAL MARKETING </span>
+    <div class="section-title">
+      <span class="section-badge">WHY CHOOSE US</span>
 
-      <h1>Grow Your Business With Data-Driven Marketing</h1>
+      <h2>Why Businesses Trust Axione Solutions</h2>
 
       <p>
-        Our digital marketing strategies help businesses improve online visibility, generate quality
-        leads, and increase conversions through proven digital channels and performance-driven
-        campaigns.
+        We combine innovation, technology, and industry expertise to deliver scalable digital
+        solutions that help businesses grow with confidence.
       </p>
-
-      <div class="marketing-grid">
-        <div class="marketing-item">
-          <i class="ri-google-fill"></i>
-
-          <div>
-            <h4>Google Ads</h4>
-            <p>High-converting PPC campaigns.</p>
-          </div>
-        </div>
-
-        <div class="marketing-item">
-          <i class="ri-search-line"></i>
-
-          <div>
-            <h4>SEO Services</h4>
-            <p>Improve search rankings organically.</p>
-          </div>
-        </div>
-
-        <div class="marketing-item">
-          <i class="ri-map-pin-line"></i>
-
-          <div>
-            <h4>Local SEO</h4>
-            <p>Reach nearby customers efficiently.</p>
-          </div>
-        </div>
-
-        <div class="marketing-item">
-          <i class="ri-bar-chart-grouped-line"></i>
-
-          <div>
-            <h4>Analytics</h4>
-            <p>Track and optimize campaign performance.</p>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="marketing-image">
-      <img src="/digital-marketing.png" alt="Digital Marketing" />
+    <div class="why-grid">
+      <div class="why-card">
+        <i class="ri-lightbulb-flash-line"></i>
+        <h3>Innovation First</h3>
+        <p>
+          We leverage modern technologies and innovative approaches to solve complex business
+          challenges.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <i class="ri-shield-check-line"></i>
+        <h3>Secure Solutions</h3>
+        <p>Security, scalability, and reliability are at the core of every solution we build.</p>
+      </div>
+
+      <div class="why-card">
+        <i class="ri-team-line"></i>
+        <h3>Expert Team</h3>
+        <p>
+          Experienced professionals delivering high-quality digital products with industry best
+          practices.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <i class="ri-customer-service-2-line"></i>
+        <h3>Dedicated Support</h3>
+        <p>Continuous maintenance and technical support to ensure long-term business success.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -214,3 +322,7 @@
     </div>
   </div>
 </section>
+
+@if (showModal) {
+  <app-service-modal [title]="selectedTitle" (close)="closeModal()"> </app-service-modal>
+}
