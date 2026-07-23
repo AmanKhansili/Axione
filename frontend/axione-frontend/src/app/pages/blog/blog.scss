@@ -1,0 +1,48 @@
+.blog-page {
+  padding: 120px 0 80px;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: auto auto 60px;
+}
+
+.section-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--text);
+  margin: 20px 0;
+}
+
+.section-header p {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.coming-soon {
+  max-width: 700px;
+  margin: auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 70px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.coming-soon i {
+  font-size: 70px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.coming-soon h2 {
+  margin-bottom: 15px;
+  color: var(--text);
+}
+
+.coming-soon p {
+  color: var(--text-light);
+}
