@@ -6,38 +6,27 @@
 
     <div class="modal-header">
       <div class="modal-icon">
-        <i class="ri-code-box-line"></i>
+        <i [class]="service.icon"></i>
       </div>
 
       <div>
-        <h2>{{ title }}</h2>
-        <p>Empowering businesses with innovative digital solutions.</p>
+        <h2>{{ service.title }}</h2>
+        <p>{{ service.overview }}</p>
       </div>
     </div>
 
     <div class="modal-body">
       <div class="modal-section">
-        <h3>Overview</h3>
-
-        <p>
-          We build secure, scalable, and modern digital solutions tailored to your business needs.
-          Our team focuses on performance, user experience, and long-term maintainability.
-        </p>
-      </div>
-
-      <div class="modal-section">
         <h3>Key Features</h3>
 
         <ul>
-          <li><i class="ri-check-line"></i> Modern & Responsive Design</li>
+          @for (feature of service.features; track feature) {
+            <li>
+              <i class="ri-check-line"></i>
 
-          <li><i class="ri-check-line"></i> Scalable Architecture</li>
-
-          <li><i class="ri-check-line"></i> High Performance</li>
-
-          <li><i class="ri-check-line"></i> Secure Implementation</li>
-
-          <li><i class="ri-check-line"></i> Ongoing Support</li>
+              {{ feature }}
+            </li>
+          }
         </ul>
       </div>
 
@@ -45,11 +34,9 @@
         <h3>Technologies</h3>
 
         <div class="tech-tags">
-          <span>Angular</span>
-          <span>.NET</span>
-          <span>Node.js</span>
-          <span>SQL Server</span>
-          <span>Azure</span>
+          @for (tech of service.technologies; track tech) {
+            <span>{{ tech }}</span>
+          }
         </div>
       </div>
     </div>
