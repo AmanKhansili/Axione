@@ -71,148 +71,28 @@
       </p>
     </div>
     <div class="services-grid">
-      <!-- Web Development -->
-      <div class="service-card">
-        <i class="ri-code-box-line service-icon"></i>
+      @for (service of services; track service.slug) {
+        <div class="service-card">
+          <i [class]="service.icon + ' service-icon'"></i>
 
-        <h3>Web Development</h3>
+          <h3>{{ service.title }}</h3>
 
-        <p>
-          We build modern, responsive, and scalable web applications that deliver exceptional user
-          experiences.
-        </p>
+          <p>
+            {{ service.shortDescription }}
+          </p>
 
-        <ul>
-          <li>Corporate Websites</li>
-          <li>E-Commerce Solutions</li>
-          <li>Custom Web Applications</li>
-          <li>API Integration</li>
-        </ul>
+          <ul>
+            @for (feature of service.features; track feature) {
+              <li>{{ feature }}</li>
+            }
+          </ul>
 
-        <button class="btn btn-outline service-btn">
-          explore service <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
-
-      <!-- Agentic AI -->
-
-      <div class="service-card">
-        <i class="ri-robot-2-line service-icon"></i>
-
-        <h3>Agentic AI</h3>
-
-        <p>
-          Intelligent AI agents designed to automate decisions, customer engagement, and business
-          operations.
-        </p>
-
-        <ul>
-          <li>AI Business Agents</li>
-          <li>Customer Support Bots</li>
-          <li>Multi-Agent Systems</li>
-          <li>AI Virtual Assistants</li>
-        </ul>
-
-        <button class="btn btn-outline service-btn">
-          explore service <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
-
-      <!-- AI Automation -->
-
-      <div class="service-card">
-        <i class="ri-cpu-line service-icon"></i>
-
-        <h3>AI Automation</h3>
-
-        <p>
-          Streamline repetitive workflows and improve productivity with intelligent automation
-          solutions.
-        </p>
-
-        <ul>
-          <li>Workflow Automation</li>
-          <li>CRM Automation</li>
-          <li>Email Automation</li>
-          <li>Business Process Automation</li>
-        </ul>
-
-        <button class="btn btn-outline service-btn">
-          explore service <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
-
-      <!-- Digital Marketing -->
-
-      <div class="service-card">
-        <i class="ri-megaphone-line service-icon"></i>
-
-        <h3>Digital Marketing</h3>
-
-        <p>
-          Data-driven marketing strategies that help businesses increase visibility, traffic, and
-          conversions.
-        </p>
-
-        <ul>
-          <li>SEO Optimization</li>
-          <li>Google Ads</li>
-          <li>Social Media Marketing</li>
-          <li>Analytics & Reporting</li>
-        </ul>
-
-        <button class="btn btn-outline service-btn">
-          explore service <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
-
-      <!-- Support -->
-
-      <div class="service-card">
-        <i class="ri-customer-service-2-line service-icon"></i>
-
-        <h3>Support & Maintenance</h3>
-
-        <p>
-          Keep your applications secure, optimized, and running smoothly with continuous technical
-          support.
-        </p>
-
-        <ul>
-          <li>Software Maintenance</li>
-          <li>Performance Optimization</li>
-          <li>Bug Fixes</li>
-          <li>Technical Support</li>
-        </ul>
-
-        <button class="btn btn-outline service-btn">
-          explore service <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
-
-      <!-- UI/UX -->
-
-      <div class="service-card">
-        <i class="ri-layout-4-line service-icon"></i>
-
-        <h3>UI/UX Design</h3>
-
-        <p>
-          Create intuitive, engaging, and visually appealing digital experiences focused on user
-          satisfaction.
-        </p>
-
-        <ul>
-          <li>User Research</li>
-          <li>Wireframing</li>
-          <li>UI Design</li>
-          <li>Interactive Prototypes</li>
-        </ul>
-
-        <button class="btn btn-outline service-btn">
-          explore service <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
+          <a [routerLink]="['/services', service.slug]" class="btn btn-outline service-btn">
+            Read More
+            <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+      }
     </div>
   </div>
 </section>

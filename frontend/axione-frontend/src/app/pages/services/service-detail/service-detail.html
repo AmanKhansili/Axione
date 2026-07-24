@@ -1,1 +1,168 @@
-<p>service-detail works!</p>
+@if (service) {
+  <section class="service-detail-hero">
+    <div class="container">
+      <div class="detail-hero-content">
+        <div class="detail-hero-left">
+          <span class="section-badge">OUR SERVICE</span>
+
+          <h1>{{ service.title }}</h1>
+
+          <p>{{ service.overview }}</p>
+
+          <div class="detail-hero-buttons">
+            <a routerLink="/contact" class="btn btn-primary"> Get Free Consultation </a>
+
+            <a routerLink="/services" class="btn btn-secondary"> View All Services </a>
+          </div>
+        </div>
+
+        <div class="detail-hero-right">
+          <div class="detail-icon">
+            <i [class]="service.icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-overview section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-badge">WHAT WE OFFER</span>
+
+        <h2>Solutions Built Around Your Business</h2>
+
+        <p>
+          Our {{ service.title }} solutions are designed to help businesses improve efficiency,
+          scalability, and digital growth.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        @for (feature of service.features; track feature) {
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="ri-checkbox-circle-line"></i>
+            </div>
+
+            <h3>{{ feature }}</h3>
+
+            <p>
+              Professional solutions tailored to your business requirements and long-term goals.
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="technology-section section">
+    <div class="container">
+      <div class="technology-content">
+        <div class="technology-left">
+          <span class="section-badge">TECHNOLOGIES</span>
+
+          <h2>Modern Technologies For Better Solutions</h2>
+
+          <p>
+            We use reliable and modern technologies to build secure, scalable, and high-performing
+            digital solutions.
+          </p>
+        </div>
+
+        <div class="technology-list">
+          @for (technology of service.technologies; track technology) {
+            <div class="technology-item">
+              <i class="ri-code-s-slash-line"></i>
+              <span>{{ technology }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits-section section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-badge">WHY IT MATTERS</span>
+
+        <h2>Benefits Of Our {{ service.title }} Services</h2>
+
+        <p>
+          Our solutions are designed to deliver long-term value, better performance, and sustainable
+          business growth.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        @for (benefit of service.benefits; track benefit) {
+          <div class="benefit-item">
+            <i class="ri-checkbox-circle-fill"></i>
+
+            <span>{{ benefit }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="service-process section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-badge">OUR PROCESS</span>
+
+        <h2>How We Deliver Your Project</h2>
+
+        <p>A simple and transparent process designed to deliver reliable solutions efficiently.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <span>01</span>
+          <i class="ri-discuss-line"></i>
+          <h3>Discovery</h3>
+          <p>We understand your business goals, requirements, and challenges.</p>
+        </div>
+
+        <div class="process-card">
+          <span>02</span>
+          <i class="ri-pencil-ruler-2-line"></i>
+          <h3>Planning</h3>
+          <p>Our team creates the right strategy and implementation plan.</p>
+        </div>
+
+        <div class="process-card">
+          <span>03</span>
+          <i class="ri-code-box-line"></i>
+          <h3>Development</h3>
+          <p>We build your solution using modern technologies and best practices.</p>
+        </div>
+
+        <div class="process-card">
+          <span>04</span>
+          <i class="ri-rocket-line"></i>
+          <h3>Launch & Support</h3>
+          <p>We deploy, monitor, and provide continuous technical support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-cta section">
+    <div class="container">
+      <div class="cta-content">
+        <span class="section-badge">LET'S WORK TOGETHER</span>
+
+        <h2>Ready To Get Started With {{ service.title }}?</h2>
+
+        <p>Let's discuss your requirements and build a solution that helps your business grow.</p>
+
+        <a routerLink="/contact" class="btn btn-primary">
+          Start Your Project
+          <i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+}
