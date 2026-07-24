@@ -89,7 +89,7 @@
           <li>API Integration</li>
         </ul>
 
-        <button class="btn btn-outline service-btn" (click)="openModal(servicesData[0])">
+        <button class="btn btn-outline service-btn">
           explore service <i class="ri-arrow-right-line"></i>
         </button>
       </div>
@@ -113,7 +113,7 @@
           <li>AI Virtual Assistants</li>
         </ul>
 
-        <button class="btn btn-outline service-btn" (click)="openModal(servicesData[1])">
+        <button class="btn btn-outline service-btn">
           explore service <i class="ri-arrow-right-line"></i>
         </button>
       </div>
@@ -137,7 +137,7 @@
           <li>Business Process Automation</li>
         </ul>
 
-        <button class="btn btn-outline service-btn" (click)="openModal(servicesData[2])">
+        <button class="btn btn-outline service-btn">
           explore service <i class="ri-arrow-right-line"></i>
         </button>
       </div>
@@ -161,7 +161,7 @@
           <li>Analytics & Reporting</li>
         </ul>
 
-        <button class="btn btn-outline service-btn" (click)="openModal(servicesData[3])">
+        <button class="btn btn-outline service-btn">
           explore service <i class="ri-arrow-right-line"></i>
         </button>
       </div>
@@ -185,7 +185,7 @@
           <li>Technical Support</li>
         </ul>
 
-        <button class="btn btn-outline service-btn" (click)="openModal(servicesData[4])">
+        <button class="btn btn-outline service-btn">
           explore service <i class="ri-arrow-right-line"></i>
         </button>
       </div>
@@ -209,7 +209,7 @@
           <li>Interactive Prototypes</li>
         </ul>
 
-        <button class="btn btn-outline service-btn" (click)="openModal(servicesData[5])">
+        <button class="btn btn-outline service-btn">
           explore service <i class="ri-arrow-right-line"></i>
         </button>
       </div>
@@ -322,7 +322,3 @@
     </div>
   </div>
 </section>
-
-@if (showModal) {
-  <app-service-modal [service]="selectedService" (close)="closeModal()"> </app-service-modal>
-}
