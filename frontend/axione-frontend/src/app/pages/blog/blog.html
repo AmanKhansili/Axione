@@ -1,18 +1,55 @@
 <section class="blog-page">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Our Blog</span>
+      <span class="section-badge">OUR BLOG</span>
+
       <h1>Insights, Ideas & Technology Updates</h1>
+
       <p>
-        Stay updated with the latest trends in web development, software engineering, cloud
-        technologies, digital marketing, and business solutions.
+        Stay updated with the latest trends in web development, artificial intelligence, automation,
+        digital marketing, and modern business technology.
       </p>
     </div>
 
-    <div class="coming-soon">
-      <i class="ri-article-line"></i>
-      <h2>Blog Coming Soon</h2>
-      <p>We're working on valuable articles, tutorials, and industry insights. Stay tuned!</p>
+    <div class="blog-grid">
+      @for (blog of blogs; track blog.slug) {
+        <article class="blog-card">
+          <div class="blog-image">
+            <img [src]="blog.image" [alt]="blog.title" />
+
+            <span class="blog-category">
+              {{ blog.category }}
+            </span>
+          </div>
+
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>
+                <i class="ri-calendar-line"></i>
+                {{ blog.date }}
+              </span>
+
+              <span>
+                <i class="ri-user-line"></i>
+                {{ blog.author }}
+              </span>
+            </div>
+
+            <h2>
+              {{ blog.title }}
+            </h2>
+
+            <p>
+              {{ blog.shortDescription }}
+            </p>
+
+            <a [routerLink]="['/blog', blog.slug]" class="read-more">
+              Read More
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </article>
+      }
     </div>
   </div>
 </section>
