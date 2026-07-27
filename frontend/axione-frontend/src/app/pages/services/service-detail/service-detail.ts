@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
-import { SERVICES } from '../services-data';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SERVICES } from '../services-data';
 
 @Component({
   selector: 'app-service-detail',
@@ -14,8 +13,10 @@ export class ServiceDetail {
   service: any;
 
   constructor(private route: ActivatedRoute) {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    this.route.paramMap.subscribe((params) => {
+      const slug = params.get('slug');
 
-    this.service = SERVICES.find((service) => service.slug === slug);
+      this.service = SERVICES.find((service) => service.slug === slug);
+    });
   }
 }
