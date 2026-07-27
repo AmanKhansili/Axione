@@ -19,7 +19,16 @@ export const SERVICES = [
       'Performance Optimization',
     ],
 
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Angular', 'PHP', 'Node.js', 'REST API'],
+    technologies: [
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'Angular',
+      'Next.js',
+      'PHP',
+      'Node.js',
+      'REST API',
+    ],
 
     benefits: [
       'Responsive Across All Devices',
@@ -154,7 +163,7 @@ export const SERVICES = [
       'Application Monitoring',
     ],
 
-    technologies: ['.NET', 'Angular', 'SQL Server', 'Azure', 'Docker', 'Monitoring Tools'],
+    technologies: ['Angular', 'SQL Server', 'Azure', 'Docker', 'Monitoring Tools'],
 
     benefits: [
       'Improved Application Stability',
