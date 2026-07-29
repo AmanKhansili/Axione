@@ -1,0 +1,96 @@
+@if (blog) {
+  <section class="blog-detail-hero">
+    <div class="container">
+      <div class="blog-detail-header">
+        <span class="section-badge">{{ blog.category }}</span>
+
+        <h1>{{ blog.title }}</h1>
+
+        <p>{{ blog.shortDescription }}</p>
+
+        <div class="blog-detail-meta">
+          <span>
+            <i class="ri-calendar-line"></i>
+            {{ blog.date }}
+          </span>
+
+          <span>
+            <i class="ri-user-line"></i>
+            {{ blog.author }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-detail-content section">
+    <div class="container">
+      <div class="blog-layout">
+        <article class="article-content">
+          <div class="article-image">
+            <img [src]="blog.image" [alt]="blog.title" />
+          </div>
+
+          @for (section of blog.content; track section.heading) {
+            <div class="article-section">
+              <h2>{{ section.heading }}</h2>
+
+              <p>{{ section.text }}</p>
+            </div>
+          }
+        </article>
+
+        <aside class="blog-sidebar">
+          <div class="sidebar-card">
+            <h3>About Axione Solutions</h3>
+
+            <p>
+              We help businesses innovate and grow through modern web development, AI solutions,
+              automation, UI/UX design, and digital marketing.
+            </p>
+
+            <a routerLink="/services" class="btn btn-primary"> Explore Services </a>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Need Expert Help?</h3>
+
+            <p>Have a project or business challenge? Let's discuss how our team can help.</p>
+
+            <a routerLink="/contact" class="btn btn-secondary"> Contact Us </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-cta section">
+    <div class="container">
+      <div class="blog-cta-content">
+        <span class="section-badge">LET'S WORK TOGETHER</span>
+
+        <h2>Ready To Transform Your Business With Technology?</h2>
+
+        <p>
+          Talk to our team about your next digital project and discover the right solution for your
+          business.
+        </p>
+
+        <a routerLink="/contact" class="btn btn-primary">
+          Get Free Consultation
+          <i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+} @else {
+  <section class="blog-not-found section">
+    <div class="container">
+      <h1>Blog Not Found</h1>
+
+      <p>The article you're looking for is not available.</p>
+
+      <a routerLink="/blog" class="btn btn-primary"> Back To Blog </a>
+    </div>
+  </section>
+}
