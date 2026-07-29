@@ -1,11 +1,12 @@
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import blogRoutes from "./routes/blog.routes.js";
-import contactRoutes from "./routes/contact.route.js";
-
-dotenv.config();
+import contactRoutes from "./routes/contact.routes.js";
+import newsletterRoutes from "./routes/newsletter.routes.js";
+import serviceRoutes from "./routes/service.routes.js";
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/blogs", blogRoutes);
 
 app.use("/api/contact", contactRoutes);
+
+app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/services", serviceRoutes);
 
 const PORT = process.env.PORT || 8000;
 
