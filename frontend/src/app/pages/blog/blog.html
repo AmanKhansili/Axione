@@ -11,45 +11,59 @@
       </p>
     </div>
 
-    <div class="blog-grid">
-      @for (blog of blogs; track blog.slug) {
-        <article class="blog-card">
-          <div class="blog-image">
-            <img [src]="blog.image" [alt]="blog.title" />
+    @if (loading) {
+      <div class="blog-status">
+        <p>Loading blogs...</p>
+      </div>
+    } @else if (blogs.length > 0) {
+      <div class="blog-grid">
+        @for (blog of blogs; track blog.id) {
+          <article class="blog-card">
+            <div class="blog-image">
+              @if (blog.image) {
+                <img [src]="blog.image" [alt]="blog.title" />
+              }
 
-            <span class="blog-category">
-              {{ blog.category }}
-            </span>
-          </div>
-
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span>
-                <i class="ri-calendar-line"></i>
-                {{ blog.date }}
-              </span>
-
-              <span>
-                <i class="ri-user-line"></i>
-                {{ blog.author }}
+              <span class="blog-category">
+                {{ blog.category }}
               </span>
             </div>
 
-            <h2>
-              {{ blog.title }}
-            </h2>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span>
+                  <i class="ri-calendar-line"></i>
 
-            <p>
-              {{ blog.shortDescription }}
-            </p>
+                  {{ blog.createdAt | date: 'MMM d, yyyy' }}
+                </span>
 
-            <a [routerLink]="['/blog', blog.slug]" class="read-more">
-              Read More
-              <i class="ri-arrow-right-line"></i>
-            </a>
-          </div>
-        </article>
-      }
-    </div>
+                <span>
+                  <i class="ri-user-line"></i>
+                  {{ blog.author }}
+                </span>
+              </div>
+
+              <h2>
+                {{ blog.title }}
+              </h2>
+
+              <p>
+                {{ blog.shortDescription }}
+              </p>
+
+              <a [routerLink]="['/blog', blog.slug]" class="read-more">
+                Read More
+                <i class="ri-arrow-right-line"></i>
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="blog-status">
+        <h3>No blogs available</h3>
+        <p>New articles will be published soon.</p>
+      </div>
+    }
   </div>
 </section>

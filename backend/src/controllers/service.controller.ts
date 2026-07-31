@@ -4,20 +4,56 @@ import prisma from "../config/prisma.js";
 // Create Service
 export const createService = async (req: Request, res: Response) => {
   try {
-    const { title, slug, description, icon } = req.body;
+    const {
+      slug,
+      title,
+      icon,
+      shortDescription,
+      overview,
+      features,
+      technologies,
+      benefits,
+      isActive,
+    } = req.body;
 
-    if (!title || !slug || !description) {
+    if (
+      !slug ||
+      !title ||
+      !icon ||
+      !shortDescription ||
+      !overview ||
+      !features ||
+      !technologies ||
+      !benefits
+    ) {
       return res.status(400).json({
-        message: "Title, slug and description are required",
+        message: "Required fields are missing",
+      });
+    }
+
+    const existingService = await prisma.service.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (existingService) {
+      return res.status(400).json({
+        message: "Service with this slug already exists",
       });
     }
 
     const service = await prisma.service.create({
       data: {
-        title,
         slug,
-        description,
+        title,
         icon,
+        shortDescription,
+        overview,
+        features,
+        technologies,
+        benefits,
+        isActive: isActive ?? true,
       },
     });
 
@@ -26,7 +62,7 @@ export const createService = async (req: Request, res: Response) => {
       service,
     });
   } catch (error) {
-    console.error("Create service error:", error);
+    console.error("Create Service Error:", error);
 
     return res.status(500).json({
       message: "Internal server error",
@@ -38,14 +74,17 @@ export const createService = async (req: Request, res: Response) => {
 export const getServices = async (req: Request, res: Response) => {
   try {
     const services = await prisma.service.findMany({
+      where: {
+        isActive: true,
+      },
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
 
     return res.status(200).json(services);
   } catch (error) {
-    console.error("Get services error:", error);
+    console.error("Get Services Error:", error);
 
     return res.status(500).json({
       message: "Internal server error",
@@ -56,13 +95,21 @@ export const getServices = async (req: Request, res: Response) => {
 // Get Service By Slug
 export const getServiceBySlug = async (req: Request<{ slug: string }>, res: Response) => {
   try {
-    const { slug } = req.params;
+    const slug = req.params.slug;
+
+    if (!slug) {
+      return res.status(400).json({
+        message: "Service slug is required",
+      });
+    }
 
     const service = await prisma.service.findUnique({
-      where: { slug },
+      where: {
+        slug: slug,
+      },
     });
 
-    if (!service) {
+    if (!service || !service.isActive) {
       return res.status(404).json({
         message: "Service not found",
       });
@@ -70,7 +117,7 @@ export const getServiceBySlug = async (req: Request<{ slug: string }>, res: Resp
 
     return res.status(200).json(service);
   } catch (error) {
-    console.error("Get service error:", error);
+    console.error("Get Service Error:", error);
 
     return res.status(500).json({
       message: "Internal server error",

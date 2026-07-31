@@ -21,18 +21,24 @@
     </div>
 
     <div class="newsletter-box">
-      <form class="newsletter-form">
+      <div class="newsletter-form">
         <div class="newsletter-input">
           <i class="ri-mail-line"></i>
 
-          <input type="email" placeholder="Enter your email address" required />
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="Enter your email address"
+            (keyup.enter)="subscribeNewsletter()"
+          />
         </div>
 
-        <button type="submit">
+        <button type="button" (click)="subscribeNewsletter()">
           Subscribe
           <i class="ri-arrow-right-line"></i>
         </button>
-      </form>
+      </div>
 
       <small> No spam. Just useful insights and updates. </small>
     </div>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { BLOGS } from '../blog-data';
+import { Api } from '../../../services/api';
 
 @Component({
   selector: 'app-blog-detail',
@@ -10,11 +10,32 @@ import { BLOGS } from '../blog-data';
   styleUrl: './blog-detail.scss',
 })
 export class BlogDetail {
-  blog: any;
+  private route = inject(ActivatedRoute);
+  private api = inject(Api);
 
-  constructor(private route: ActivatedRoute) {
+  blog: any = null;
+  loading = true;
+
+  ngOnInit() {
     const slug = this.route.snapshot.paramMap.get('slug');
 
-    this.blog = BLOGS.find((blog) => blog.slug === slug);
+    if (!slug) {
+      this.loading = false;
+      return;
+    }
+
+    this.api.getBlogBySlug(slug).subscribe({
+      next: (response: any) => {
+        this.blog = response;
+        this.loading = false;
+      },
+
+      error: (error) => {
+        console.error('Blog Detail Error:', error);
+
+        this.blog = null;
+        this.loading = false;
+      },
+    });
   }
 }

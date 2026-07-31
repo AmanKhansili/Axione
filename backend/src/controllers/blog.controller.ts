@@ -4,21 +4,38 @@ import prisma from "../config/prisma.js";
 // Create Blog
 export const createBlog = async (req: Request, res: Response) => {
   try {
-    const { title, slug, description, content, image } = req.body;
+    const { slug, title, shortDescription, category, date, image, author, content, published } =
+      req.body;
 
-    if (!title || !slug || !description || !content) {
+    if (!slug || !title || !shortDescription || !category || !date || !author || !content) {
       return res.status(400).json({
         message: "Required fields are missing",
       });
     }
 
+    const existingBlog = await prisma.blog.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (existingBlog) {
+      return res.status(400).json({
+        message: "Blog with this slug already exists",
+      });
+    }
+
     const blog = await prisma.blog.create({
       data: {
-        title,
         slug,
-        description,
-        content,
+        title,
+        shortDescription,
+        category,
+        date,
         image,
+        author,
+        content,
+        published: published ?? false,
       },
     });
 
@@ -27,7 +44,7 @@ export const createBlog = async (req: Request, res: Response) => {
       blog,
     });
   } catch (error) {
-    console.error("Create blog error:", error);
+    console.error("Create Blog Error:", error);
 
     return res.status(500).json({
       message: "Internal server error",

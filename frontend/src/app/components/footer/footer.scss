@@ -567,3 +567,31 @@ footer {
     width: 100%;
   }
 }
+
+.newsletter-message {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 9px;
+  padding-left: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.newsletter-message.success {
+  color: #7dffb2;
+}
+
+.newsletter-message.error {
+  color: #ff9b9b;
+}
+
+.newsletter-message i {
+  font-size: 16px;
+}
+
+.newsletter-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}

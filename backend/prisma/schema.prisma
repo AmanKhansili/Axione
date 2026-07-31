@@ -18,26 +18,33 @@ model Admin {
 }
 
 model Blog {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  description String
-  content     String
-  image       String?
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  shortDescription String
+  category         String
+  date             String
+  image            String?
+  author           String
+  content          Json
+  published        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Service {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  description String
-  icon        String?
-  published   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  icon             String
+  shortDescription String
+  overview         String
+  features         Json
+  technologies     Json
+  benefits         Json
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Contact {

@@ -1,8 +1,16 @@
-@if (blog) {
+@if (loading) {
+  <section class="blog-not-found section">
+    <div class="container">
+      <h2>Loading article...</h2>
+    </div>
+  </section>
+} @else if (blog) {
   <section class="blog-detail-hero">
     <div class="container">
       <div class="blog-detail-header">
-        <span class="section-badge">{{ blog.category }}</span>
+        <span class="section-badge">
+          {{ blog.category }}
+        </span>
 
         <h1>{{ blog.title }}</h1>
 
@@ -11,7 +19,7 @@
         <div class="blog-detail-meta">
           <span>
             <i class="ri-calendar-line"></i>
-            {{ blog.date }}
+            {{ blog.createdAt }}
           </span>
 
           <span>
@@ -27,14 +35,15 @@
     <div class="container">
       <div class="blog-layout">
         <article class="article-content">
-          <div class="article-image">
-            <img [src]="blog.image" [alt]="blog.title" />
-          </div>
+          @if (blog.image) {
+            <div class="article-image">
+              <img [src]="blog.image" [alt]="blog.title" />
+            </div>
+          }
 
           @for (section of blog.content; track section.heading) {
             <div class="article-section">
               <h2>{{ section.heading }}</h2>
-
               <p>{{ section.text }}</p>
             </div>
           }
@@ -67,7 +76,7 @@
   <section class="blog-cta section">
     <div class="container">
       <div class="blog-cta-content">
-        <span class="section-badge">LET'S WORK TOGETHER</span>
+        <span class="section-badge"> LET'S WORK TOGETHER </span>
 
         <h2>Ready To Transform Your Business With Technology?</h2>
 
