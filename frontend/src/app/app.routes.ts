@@ -8,6 +8,17 @@ import { Contact } from './pages/contact/contact';
 import { Blog } from './pages/blog/blog';
 import { BlogDetail } from './pages/blog/blog-detail/blog-detail';
 
+import { DashboardLayout } from './admin/layout/dashboard-layout/dashboard-layout';
+import { Login } from './admin/pages/login/login';
+import { Dashboard } from './admin/pages/dashboard/dashboard';
+import { Newsletter as AdminNewsletter } from './admin/pages/newsletter/newsletter';
+import { Blogs as AdminBlogs } from './admin/pages/blogs/blogs';
+import { Contacts as AdminContacts } from './admin/pages/contacts/contacts';
+import { Services as AdminServices } from './admin/pages/services/services';
+import { Chatbot as AdminChatbot } from './admin/pages/chatbot/chatbot';
+
+import { authGuard } from './admin/guards/auth-guard';
+
 export const routes: Routes = [
   {
     path: '',
@@ -67,6 +78,49 @@ export const routes: Routes = [
       description:
         'Contact Axione Solutions to discuss your web development, AI automation, digital marketing, UI/UX design or technology project.',
     },
+  },
+
+  {
+    path: 'admin/login',
+    component: Login,
+  },
+
+  {
+    path: 'admin',
+    component: DashboardLayout,
+    canActivate: [authGuard],
+
+    children: [
+      {
+        path: '',
+        component: Dashboard,
+      },
+
+      {
+        path: 'blogs',
+        component: AdminBlogs,
+      },
+
+      {
+        path: 'services',
+        component: AdminServices,
+      },
+
+      {
+        path: 'contacts',
+        component: AdminContacts,
+      },
+
+      {
+        path: 'newsletter',
+        component: AdminNewsletter,
+      },
+
+      {
+        path: 'chatbot',
+        component: AdminChatbot,
+      },
+    ],
   },
 
   {

@@ -1,0 +1,76 @@
+<div class="sidebar">
+  <div class="logo">
+    <img src="/logo-white.png" alt="Logo" />
+
+    <span>Axione</span>
+  </div>
+
+  <nav>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">
+      <i class="ri-dashboard-line"></i>
+
+      Dashboard
+    </a>
+
+    <button class="menu-btn" (click)="toggleBlogs()">
+      <div>
+        <i class="ri-article-line"></i>
+
+        Blogs
+      </div>
+
+      <i class="ri-arrow-down-s-line" [class.rotate]="blogOpen"></i>
+    </button>
+
+    @if (blogOpen) {
+      <div class="submenu">
+        <a routerLink="/admin/blogs" routerLinkActive="active"> All Blogs </a>
+
+        <a routerLink="/admin/blogs/add"> Add Blog </a>
+      </div>
+    }
+
+    <button class="menu-btn" (click)="toggleServices()">
+      <div>
+        <i class="ri-briefcase-line"></i>
+
+        Services
+      </div>
+
+      <i class="ri-arrow-down-s-line" [class.rotate]="serviceOpen"></i>
+    </button>
+
+    @if (serviceOpen) {
+      <div class="submenu">
+        <a routerLink="/admin/services"> All Services </a>
+
+        <a routerLink="/admin/services/add"> Add Service </a>
+      </div>
+    }
+
+    <a routerLink="/admin/contacts">
+      <i class="ri-mail-line"></i>
+
+      Contacts
+    </a>
+
+    <a routerLink="/admin/newsletter">
+      <i class="ri-mail-send-line"></i>
+
+      Newsletter
+    </a>
+
+    <a routerLink="/admin/chatbot">
+      <i class="ri-robot-2-line"></i>
+
+      Chatbot
+    </a>
+  </nav>
+
+  <div class="logout">
+    <a (click)="logout()">
+      <i class="ri-logout-circle-r-line"></i>
+      Logout
+    </a>
+  </div>
+</div>

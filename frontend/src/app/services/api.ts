@@ -34,4 +34,12 @@ export class Api {
   getServiceBySlug(slug: string) {
     return this.http.get<any>(`${this.apiUrl}/services/${slug}`);
   }
+
+  // Admin dashboard
+  login(email: string, password: string) {
+    return this.http.post(`${this.apiUrl}/auth/login`, {
+      email,
+      password,
+    });
+  }
 }

@@ -1,0 +1,53 @@
+<section class="dashboard-header">
+  <div>
+    <h1>Welcome back, {{ admin.name }} 👋</h1>
+
+    <p>Here's what's happening today.</p>
+  </div>
+</section>
+
+<section class="stats-grid">
+  @for (card of cards; track card.title) {
+    <div class="stat-card">
+      <div class="icon" [style.background]="card.color">
+        <i [class]="card.icon"></i>
+      </div>
+
+      <div class="content">
+        <h2>{{ card.value }}</h2>
+
+        <span>{{ card.title }}</span>
+      </div>
+    </div>
+  }
+</section>
+
+<section class="quick-actions">
+  <h2>Quick Actions</h2>
+
+  <div class="actions-grid">
+    <button routerLink="/admin/blogs/add">
+      <i class="ri-add-circle-line"></i>
+
+      Add Blog
+    </button>
+
+    <button routerLink="/admin/services/add">
+      <i class="ri-briefcase-line"></i>
+
+      Add Service
+    </button>
+
+    <button routerLink="/admin/contacts">
+      <i class="ri-mail-line"></i>
+
+      Contacts
+    </button>
+
+    <button routerLink="/admin/newsletter">
+      <i class="ri-mail-send-line"></i>
+
+      Newsletter
+    </button>
+  </div>
+</section>

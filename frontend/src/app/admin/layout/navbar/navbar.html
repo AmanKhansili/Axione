@@ -1,0 +1,33 @@
+<header class="navbar">
+  <div class="navbar-left">
+    <div class="search-box">
+      <i class="ri-search-line"></i>
+
+      <input type="text" placeholder="Search..." />
+    </div>
+  </div>
+
+  <div class="navbar-right">
+    <button class="icon-btn">
+      <i class="ri-notification-3-line"></i>
+
+      <span class="dot"></span>
+    </button>
+
+    <button class="icon-btn">
+      <i class="ri-moon-line"></i>
+    </button>
+
+    <div class="profile">
+      <div class="profile-info">
+        <h4>{{ admin.name }}</h4>
+
+        <span>{{ admin.email }}</span>
+      </div>
+
+      <div class="profile-avatar">
+        {{ admin.name?.charAt(0).toUpperCase() }}
+      </div>
+    </div>
+  </div>
+</header>
