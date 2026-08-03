@@ -26,4 +26,12 @@ export class Api {
   getBlogBySlug(slug: string) {
     return this.http.get<any>(`${this.apiUrl}/blogs/${slug}`);
   }
+
+  getServices() {
+    return this.http.get<any[]>(`${this.apiUrl}/services`);
+  }
+
+  getServiceBySlug(slug: string) {
+    return this.http.get<any>(`${this.apiUrl}/services/${slug}`);
+  }
 }

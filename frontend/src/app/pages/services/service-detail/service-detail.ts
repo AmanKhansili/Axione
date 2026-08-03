@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { SERVICES } from '../services-data';
+import { Api } from '../../../services/api';
 
 @Component({
   selector: 'app-service-detail',
@@ -9,14 +9,39 @@ import { SERVICES } from '../services-data';
   templateUrl: './service-detail.html',
   styleUrl: './service-detail.scss',
 })
-export class ServiceDetail {
-  service: any;
+export class ServiceDetail implements OnInit {
+  private route = inject(ActivatedRoute);
+  private api = inject(Api);
 
-  constructor(private route: ActivatedRoute) {
+  service: any = null;
+  loading = true;
+
+  ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const slug = params.get('slug');
 
-      this.service = SERVICES.find((service) => service.slug === slug);
+      if (!slug) {
+        this.loading = false;
+        return;
+      }
+
+      this.getService(slug);
+    });
+  }
+
+  getService(slug: string): void {
+    this.api.getServiceBySlug(slug).subscribe({
+      next: (response: any) => {
+        this.service = response;
+        this.loading = false;
+      },
+
+      error: (error) => {
+        console.error('Service Detail Error:', error);
+
+        this.service = null;
+        this.loading = false;
+      },
     });
   }
 }

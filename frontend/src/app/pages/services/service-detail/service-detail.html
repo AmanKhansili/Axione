@@ -1,4 +1,12 @@
-@if (service) {
+@if (loading) {
+  <section class="service-overview section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Loading service...</h2>
+      </div>
+    </div>
+  </section>
+} @else if (service) {
   <section class="service-detail-hero">
     <div class="container">
       <div class="detail-hero-content">
@@ -74,6 +82,7 @@
           @for (technology of service.technologies; track technology) {
             <div class="technology-item">
               <i class="ri-code-s-slash-line"></i>
+
               <span>{{ technology }}</span>
             </div>
           }
@@ -120,29 +129,41 @@
       <div class="process-grid">
         <div class="process-card">
           <span>01</span>
+
           <i class="ri-discuss-line"></i>
+
           <h3>Discovery</h3>
+
           <p>We understand your business goals, requirements, and challenges.</p>
         </div>
 
         <div class="process-card">
           <span>02</span>
+
           <i class="ri-pencil-ruler-2-line"></i>
+
           <h3>Planning</h3>
+
           <p>Our team creates the right strategy and implementation plan.</p>
         </div>
 
         <div class="process-card">
           <span>03</span>
+
           <i class="ri-code-box-line"></i>
+
           <h3>Development</h3>
+
           <p>We build your solution using modern technologies and best practices.</p>
         </div>
 
         <div class="process-card">
           <span>04</span>
+
           <i class="ri-rocket-line"></i>
+
           <h3>Launch & Support</h3>
+
           <p>We deploy, monitor, and provide continuous technical support.</p>
         </div>
       </div>
@@ -160,8 +181,23 @@
 
         <a routerLink="/contact" class="btn btn-primary">
           Start Your Project
+
           <i class="ri-arrow-right-line"></i>
         </a>
+      </div>
+    </div>
+  </section>
+} @else {
+  <section class="service-overview section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-badge">SERVICE</span>
+
+        <h2>Service Not Found</h2>
+
+        <p>The service you're looking for is not available.</p>
+
+        <a routerLink="/services" class="btn btn-primary"> View All Services </a>
       </div>
     </div>
   </section>
