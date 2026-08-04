@@ -3,55 +3,99 @@
 }
 
 .dashboard-header h1 {
-  color: #fff;
-  font-size: 34px;
+  color: #0f172a;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .dashboard-header p {
-  color: #94a3b8;
-  margin-top: 8px;
+  color: #64748b;
+  font-size: 17px;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
-  margin-bottom: 50px;
+  margin: 35px 0 50px;
 }
 
 .stat-card {
-  background: #1e293b;
-  border-radius: 20px;
-  padding: 25px;
+  background: white;
+  border: 1px solid var(--admin-border);
+  border-radius: 22px;
+  padding: 24px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   transition: 0.3s;
+  box-shadow: var(--admin-shadow);
 }
 
 .stat-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: var(--admin-shadow-hover);
 }
 
 .icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .icon i {
-  color: #fff;
-  font-size: 26px;
+  color: white;
+  font-size: 28px;
 }
 
 .content h2 {
-  color: #fff;
-  margin-bottom: 6px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
 }
 
 .content span {
-  color: #94a3b8;
+  color: #64748b;
+  font-size: 15px;
+}
+.quick-actions {
+  margin-top: 30px;
+}
+
+.quick-actions h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.actions-grid button {
+  height: 70px;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--admin-shadow);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: 0.3s;
+}
+
+.actions-grid button:hover {
+  background: var(--gradient);
+  color: white;
+  transform: translateY(-5px);
 }

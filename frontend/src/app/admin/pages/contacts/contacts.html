@@ -1,1 +1,64 @@
-<p>contacts works!</p>
+<section class="contacts-page">
+  <div class="page-header">
+    <div>
+      <h1>Contacts</h1>
+
+      <p>Manage all customer enquiries.</p>
+    </div>
+  </div>
+
+  <div class="search-box">
+    <i class="ri-search-line"></i>
+
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (input)="searchContacts()"
+      placeholder="Search contact..."
+    />
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+
+          <th>Email</th>
+
+          <th>Phone</th>
+
+          <th>Subject</th>
+
+          <th>Date</th>
+
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (!loading) {
+          @for (contact of filteredContacts; track contact.id) {
+            <tr>
+              <td>{{ contact.name }}</td>
+
+              <td>{{ contact.email }}</td>
+
+              <td>{{ contact.phone || '-' }}</td>
+
+              <td>{{ contact.subject || '-' }}</td>
+
+              <td>{{ contact.createdAt | date: 'dd MMM yyyy' }}</td>
+
+              <td>
+                <button class="delete" (click)="deleteContact(contact.id)">
+                  <i class="ri-delete-bin-6-line"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

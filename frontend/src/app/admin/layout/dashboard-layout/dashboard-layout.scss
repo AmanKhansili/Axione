@@ -1,21 +1,46 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
 .admin-layout {
   display: flex;
-  min-height: 100vh;
-  background: #0f172a;
+  height: 100vh;
+  background: var(--admin-bg);
 }
 
 .admin-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 280px;
+  overflow: hidden;
 }
 
 .admin-content {
   flex: 1;
-  padding: 2rem;
   overflow-y: auto;
+  padding: 30px;
   background:
-    radial-gradient(circle at top right, rgba(123, 47, 247, 0.15), transparent 35%),
-    radial-gradient(circle at bottom left, rgba(106, 17, 203, 0.12), transparent 35%), #0f172a;
+    radial-gradient(circle at top right, rgba(123, 47, 247, 0.08), transparent 350px),
+    radial-gradient(circle at bottom left, rgba(106, 17, 203, 0.05), transparent 250px),
+    var(--admin-bg);
+}
+
+.admin-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+.admin-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+@media (max-width: 992px) {
+  .admin-content {
+    padding: 20px;
+  }
 }

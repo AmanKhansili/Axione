@@ -1,0 +1,142 @@
+.services-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h1 {
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+
+.page-header p {
+  color: #64748b;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 22px;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 54px;
+  padding: 0 18px;
+  background: #fff;
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  box-shadow: var(--admin-shadow);
+}
+
+.search-box i {
+  color: #64748b;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.table-card {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--admin-shadow);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 18px 22px;
+  text-align: left;
+  background: #f8fafc;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+td {
+  padding: 18px 22px;
+  border-top: 1px solid #edf2f7;
+}
+
+tbody tr:hover {
+  background: #fafafa;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.published {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.draft {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions a,
+.actions button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #334155;
+  transition: 0.3s;
+}
+
+.actions a:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.actions .delete:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+}

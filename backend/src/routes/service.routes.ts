@@ -3,6 +3,7 @@ import { Router } from "express";
 import {
   createService,
   getServices,
+  getServiceById,
   getServiceBySlug,
   updateService,
   deleteService,
@@ -13,6 +14,8 @@ import { verifyToken } from "../middleware/auth.middleware.js";
 const router = Router();
 
 router.get("/", getServices);
+
+router.get("/id/:id", verifyToken, getServiceById);
 
 router.get("/:slug", getServiceBySlug);
 

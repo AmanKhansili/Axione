@@ -18,6 +18,7 @@ import { Services as AdminServices } from './admin/pages/services/services';
 import { Chatbot as AdminChatbot } from './admin/pages/chatbot/chatbot';
 
 import { authGuard } from './admin/guards/auth-guard';
+import { BlogForm } from './admin/pages/blog-form/blog-form';
 
 export const routes: Routes = [
   {
@@ -93,12 +94,23 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+
+      {
+        path: 'dashboard',
         component: Dashboard,
       },
 
       {
         path: 'blogs',
         component: AdminBlogs,
+      },
+
+      {
+        path: 'blogs/add',
+        component: BlogForm,
       },
 
       {
@@ -121,10 +133,5 @@ export const routes: Routes = [
         component: AdminChatbot,
       },
     ],
-  },
-
-  {
-    path: '**',
-    redirectTo: '',
   },
 ];

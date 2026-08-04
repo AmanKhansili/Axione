@@ -1,1 +1,57 @@
-<p>newsletter works!</p>
+<section class="newsletter-page">
+  <div class="page-header">
+    <div>
+      <h1>Newsletter</h1>
+      <p>Manage newsletter subscribers.</p>
+    </div>
+  </div>
+
+  <div class="search-box">
+    <i class="ri-search-line"></i>
+
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (input)="searchSubscribers()"
+      placeholder="Search by email..."
+    />
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Subscribed On</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (!loading) {
+          @for (subscriber of filteredSubscribers; track subscriber.id) {
+            <tr>
+              <td>{{ subscriber.email }}</td>
+
+              <td>{{ subscriber.createdAt | date: 'dd MMM yyyy' }}</td>
+
+              <td>
+                <button class="delete" (click)="deleteSubscriber(subscriber.id)">
+                  <i class="ri-delete-bin-6-line"></i>
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="empty-state">No subscribers found.</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td colspan="3" class="empty-state">Loading subscribers...</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

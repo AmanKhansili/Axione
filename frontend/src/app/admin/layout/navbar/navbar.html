@@ -1,32 +1,32 @@
 <header class="navbar">
   <div class="navbar-left">
+    <div class="page-title">
+      <h1>{{ pageTitle }}</h1>
+
+      <p>Welcome back, {{ admin.name }}</p>
+    </div>
+  </div>
+
+  <div class="navbar-right">
     <div class="search-box">
       <i class="ri-search-line"></i>
 
       <input type="text" placeholder="Search..." />
     </div>
-  </div>
 
-  <div class="navbar-right">
     <button class="icon-btn">
       <i class="ri-notification-3-line"></i>
-
-      <span class="dot"></span>
-    </button>
-
-    <button class="icon-btn">
-      <i class="ri-moon-line"></i>
     </button>
 
     <div class="profile">
-      <div class="profile-info">
-        <h4>{{ admin.name }}</h4>
-
-        <span>{{ admin.email }}</span>
+      <div class="avatar">
+        {{ admin.name?.charAt(0) }}
       </div>
 
-      <div class="profile-avatar">
-        {{ admin.name?.charAt(0).toUpperCase() }}
+      <div>
+        <h4>{{ admin.name }}</h4>
+
+        <span>Administrator</span>
       </div>
     </div>
   </div>

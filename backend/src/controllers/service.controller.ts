@@ -92,6 +92,33 @@ export const getServices = async (req: Request, res: Response) => {
   }
 };
 
+// Get Service By Id (Admin)
+export const getServiceById = async (req: Request<{ id: string }>, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const service = await prisma.service.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!service) {
+      return res.status(404).json({
+        message: "Service not found",
+      });
+    }
+
+    return res.status(200).json(service);
+  } catch (error) {
+    console.error("Get Service By Id Error:", error);
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
 // Get Service By Slug
 export const getServiceBySlug = async (req: Request<{ slug: string }>, res: Response) => {
   try {
@@ -129,15 +156,60 @@ export const getServiceBySlug = async (req: Request<{ slug: string }>, res: Resp
 export const updateService = async (req: Request<{ id: string }>, res: Response) => {
   try {
     const { id } = req.params;
-    const { title, slug, description, icon } = req.body;
+
+    const {
+      slug,
+      title,
+      icon,
+      shortDescription,
+      overview,
+      features,
+      technologies,
+      benefits,
+      isActive,
+    } = req.body;
+
+    const existingService = await prisma.service.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!existingService) {
+      return res.status(404).json({
+        message: "Service not found",
+      });
+    }
+
+    const duplicateSlug = await prisma.service.findFirst({
+      where: {
+        slug,
+        NOT: {
+          id,
+        },
+      },
+    });
+
+    if (duplicateSlug) {
+      return res.status(400).json({
+        message: "Service with this slug already exists",
+      });
+    }
 
     const service = await prisma.service.update({
-      where: { id },
+      where: {
+        id,
+      },
       data: {
-        title,
         slug,
-        description,
+        title,
         icon,
+        shortDescription,
+        overview,
+        features,
+        technologies,
+        benefits,
+        isActive,
       },
     });
 
@@ -146,7 +218,7 @@ export const updateService = async (req: Request<{ id: string }>, res: Response)
       service,
     });
   } catch (error) {
-    console.error("Update service error:", error);
+    console.error("Update Service Error:", error);
 
     return res.status(500).json({
       message: "Internal server error",

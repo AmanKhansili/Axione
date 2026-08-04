@@ -7,6 +7,7 @@ import blogRoutes from "./routes/blog.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import newsletterRoutes from "./routes/newsletter.routes.js";
 import serviceRoutes from "./routes/service.routes.js";
+import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use("/api/contact", contactRoutes);
 
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/services", serviceRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 
 const PORT = process.env.PORT || 8000;
 

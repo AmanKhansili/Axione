@@ -7,7 +7,16 @@ export const createBlog = async (req: Request, res: Response) => {
     const { slug, title, shortDescription, category, date, image, author, content, published } =
       req.body;
 
-    if (!slug || !title || !shortDescription || !category || !date || !author || !content) {
+    if (
+      !slug ||
+      !title ||
+      !shortDescription ||
+      !category ||
+      !date ||
+      !author ||
+      !Array.isArray(content) ||
+      content.length === 0
+    ) {
       return res.status(400).json({
         message: "Required fields are missing",
       });
@@ -71,6 +80,33 @@ export const getBlogs = async (req: Request, res: Response) => {
   }
 };
 
+// Get Blog By Id (Admin)
+export const getBlogById = async (req: Request<{ id: string }>, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const blog = await prisma.blog.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!blog) {
+      return res.status(404).json({
+        message: "Blog not found",
+      });
+    }
+
+    return res.status(200).json(blog);
+  } catch (error) {
+    console.error("Get Blog By Id Error:", error);
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
 // Get Blog By Slug
 export const getBlogBySlug = async (req: Request<{ slug: string }>, res: Response) => {
   try {
@@ -103,18 +139,49 @@ export const updateBlog = async (req: Request<{ id: string }>, res: Response) =>
   try {
     const { id } = req.params;
 
-    const { title, slug, description, content, image, published } = req.body;
+    const { slug, title, shortDescription, category, date, image, author, content, published } =
+      req.body;
+
+    const existingBlog = await prisma.blog.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!existingBlog) {
+      return res.status(404).json({
+        message: "Blog not found",
+      });
+    }
+
+    const duplicateSlug = await prisma.blog.findFirst({
+      where: {
+        slug,
+        NOT: {
+          id,
+        },
+      },
+    });
+
+    if (duplicateSlug) {
+      return res.status(400).json({
+        message: "Blog with this slug already exists",
+      });
+    }
 
     const blog = await prisma.blog.update({
       where: {
         id,
       },
       data: {
-        title,
         slug,
-        description,
-        content,
+        title,
+        shortDescription,
+        category,
+        date,
         image,
+        author,
+        content,
         published,
       },
     });
@@ -124,7 +191,7 @@ export const updateBlog = async (req: Request<{ id: string }>, res: Response) =>
       blog,
     });
   } catch (error) {
-    console.error("Update blog error:", error);
+    console.error("Update Blog Error:", error);
 
     return res.status(500).json({
       message: "Internal server error",

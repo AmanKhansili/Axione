@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from '../sidebar/sidebar';
 import { Navbar } from '../navbar/navbar';
@@ -10,4 +10,12 @@ import { Navbar } from '../navbar/navbar';
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.scss',
 })
-export class DashboardLayout {}
+export class DashboardLayout implements OnInit, OnDestroy {
+  ngOnInit() {
+    document.body.classList.add('admin-page');
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('admin-page');
+  }
+}

@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createBlog,
   getBlogs,
+  getBlogById,
   getBlogBySlug,
   updateBlog,
   deleteBlog,
@@ -10,6 +11,13 @@ import {
 import { verifyToken } from "../middleware/auth.middleware.js";
 
 const router = Router();
+
+// Public
+router.get("/", getBlogs);
+
+router.get("/id/:id", verifyToken, getBlogById);
+
+router.get("/:slug", getBlogBySlug);
 
 // Public
 router.get("/", getBlogs);

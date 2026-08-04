@@ -1,1 +1,100 @@
-<p>services works!</p>
+<section class="services-page">
+  <div class="page-header">
+    <div>
+      <h1>Services</h1>
+
+      <p>Manage all company services.</p>
+    </div>
+
+    <a routerLink="/admin/services/add" class="btn">
+      <i class="ri-add-line"></i>
+
+      Add Service
+    </a>
+  </div>
+
+  <div class="search-box">
+    <i class="ri-search-line"></i>
+
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (input)="searchServices()"
+      placeholder="Search services..."
+    />
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Icon</th>
+
+          <th>Title</th>
+
+          <th>Description</th>
+
+          <th>Status</th>
+
+          <th>Date</th>
+
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (!loading) {
+          @for (service of filteredServices; track service.id) {
+            <tr>
+              <td>
+                <i [class]="service.icon" style="font-size: 28px; color: #7b2ff7"></i>
+              </td>
+
+              <td>
+                <strong>{{ service.title }}</strong>
+              </td>
+
+              <td>
+                {{ service.shortDescription }}
+              </td>
+
+              <td>
+                <span
+                  class="status"
+                  [class.published]="service.isActive"
+                  [class.draft]="!service.isActive"
+                >
+                  {{ service.isActive ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+
+              <td>
+                {{ service.createdAt | date: 'dd MMM yyyy' }}
+              </td>
+
+              <td>
+                <div class="actions">
+                  <a [routerLink]="['/admin/services/edit', service.id]">
+                    <i class="ri-edit-line"></i>
+                  </a>
+
+                  <button class="delete" (click)="deleteService(service.id)">
+                    <i class="ri-delete-bin-6-line"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">No services found.</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td colspan="6" class="empty-state">Loading services...</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

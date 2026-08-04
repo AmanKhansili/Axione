@@ -1,1 +1,90 @@
-<p>blogs works!</p>
+<section class="blogs-page">
+  <div class="page-header">
+    <div>
+      <h1>Blogs</h1>
+
+      <p>Manage all published and draft blogs.</p>
+    </div>
+
+    <a routerLink="/admin/blogs/add" class="btn">
+      <i class="ri-add-line"></i>
+
+      Add Blog
+    </a>
+  </div>
+
+  <div class="search-box">
+    <i class="ri-search-line"></i>
+
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (input)="searchBlogs()"
+      placeholder="Search by title or category..."
+    />
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+
+          <th>Title</th>
+
+          <th>Category</th>
+
+          <th>Status</th>
+
+          <th>Date</th>
+
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (!loading) {
+          @for (blog of filteredBlogs; track blog.id) {
+            <tr>
+              <td>
+                <img [src]="blog.image" alt="" />
+              </td>
+
+              <td>
+                <strong>{{ blog.title }}</strong>
+              </td>
+
+              <td>{{ blog.category }}</td>
+
+              <td>
+                <span
+                  class="status"
+                  [class.published]="blog.published"
+                  [class.draft]="!blog.published"
+                >
+                  {{ blog.published ? 'Published' : 'Draft' }}
+                </span>
+              </td>
+
+              <td>
+                {{ blog.createdAt | date: 'dd MMM yyyy' }}
+              </td>
+
+              <td>
+                <div class="actions">
+                  <a routerLink="/admin/blogs/edit/{{ blog.id }}">
+                    <i class="ri-edit-line"></i>
+                  </a>
+
+                  <button class="delete" (click)="deleteBlog(blog.id)">
+                    <i class="ri-delete-bin-6-line"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

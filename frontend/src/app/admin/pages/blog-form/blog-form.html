@@ -1,0 +1,91 @@
+<section class="blog-form-page">
+  <div class="page-header">
+    <div>
+      <h1>{{ isEdit ? 'Edit Blog' : 'Add Blog' }}</h1>
+      <p>Create and publish a new blog.</p>
+    </div>
+  </div>
+
+  <form (ngSubmit)="saveBlog()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" [(ngModel)]="blog.title" name="title" (input)="generateSlug()" />
+      </div>
+
+      <div class="form-group">
+        <label>Slug</label>
+        <input type="text" [(ngModel)]="blog.slug" name="slug" placeholder="agentic-ai" />
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <input
+          type="text"
+          [(ngModel)]="blog.category"
+          name="category"
+          placeholder="Artificial Intelligence"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Author</label>
+        <input type="text" [(ngModel)]="blog.author" name="author" placeholder="Axione Solutions" />
+      </div>
+
+      <div class="form-group full">
+        <label>Image URL</label>
+        <input type="text" [(ngModel)]="blog.image" name="image" placeholder="https://..." />
+      </div>
+
+      <div class="form-group full">
+        <label>Short Description</label>
+        <textarea rows="4" [(ngModel)]="blog.shortDescription" name="shortDescription"></textarea>
+      </div>
+    </div>
+
+    <div class="publish">
+      <label>
+        <input type="checkbox" [(ngModel)]="blog.published" name="published" />
+
+        Publish Blog
+      </label>
+    </div>
+
+    <h2>Content Sections</h2>
+
+    @for (section of blog.content; track $index) {
+      <div class="content-card">
+        <div class="form-group">
+          <label>Heading</label>
+
+          <input type="text" [(ngModel)]="section.heading" [name]="'heading' + $index" />
+        </div>
+
+        <div class="form-group">
+          <label>Content</label>
+
+          <textarea rows="5" [(ngModel)]="section.text" [name]="'text' + $index"></textarea>
+        </div>
+
+        @if (blog.content.length > 1) {
+          <button type="button" class="remove-btn" (click)="removeSection($index)">
+            Remove Section
+          </button>
+        }
+      </div>
+    }
+
+    <div class="buttons">
+      <button type="button" class="secondary-btn" (click)="addSection()">Add Section</button>
+
+      <button type="submit" class="primary-btn" [disabled]="isLoading">
+        @if (isLoading) {
+          Saving...
+        } @else {
+          {{ isEdit ? 'Update Blog' : 'Save Blog' }}Save Blog
+        }
+      </button>
+    </div>
+  </form>
+</section>
