@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+// Website Pages
 import { Home } from './pages/home/home';
 import { About } from './pages/about/about';
 import { Services } from './pages/services/services';
@@ -8,19 +9,24 @@ import { Contact } from './pages/contact/contact';
 import { Blog } from './pages/blog/blog';
 import { BlogDetail } from './pages/blog/blog-detail/blog-detail';
 
-import { DashboardLayout } from './admin/layout/dashboard-layout/dashboard-layout';
+// Admin Pages
 import { Login } from './admin/pages/login/login';
 import { Dashboard } from './admin/pages/dashboard/dashboard';
-import { Newsletter as AdminNewsletter } from './admin/pages/newsletter/newsletter';
 import { Blogs as AdminBlogs } from './admin/pages/blogs/blogs';
-import { Contacts as AdminContacts } from './admin/pages/contacts/contacts';
+import { BlogForm } from './admin/pages/blog-form/blog-form';
 import { Services as AdminServices } from './admin/pages/services/services';
+import { Contacts as AdminContacts } from './admin/pages/contacts/contacts';
+import { Newsletter as AdminNewsletter } from './admin/pages/newsletter/newsletter';
 import { Chatbot as AdminChatbot } from './admin/pages/chatbot/chatbot';
 
+// Admin Layout
+import { DashboardLayout } from './admin/layout/dashboard-layout/dashboard-layout';
+
+// Guards
 import { authGuard } from './admin/guards/auth-guard';
-import { BlogForm } from './admin/pages/blog-form/blog-form';
 
 export const routes: Routes = [
+  // Website Routes
   {
     path: '',
     component: Home,
@@ -37,7 +43,7 @@ export const routes: Routes = [
     title: 'About Us | Axione Solutions',
     data: {
       description:
-        'Learn about Axione Solutions and our approach to delivering innovative, scalable and reliable digital solutions for modern businesses.',
+        'Learn about Axione Solutions and our approach to delivering innovative, scalable and reliable digital solutions.',
     },
   },
 
@@ -46,8 +52,7 @@ export const routes: Routes = [
     component: Services,
     title: 'Digital & AI Services | Axione Solutions',
     data: {
-      description:
-        'Explore web development, Agentic AI, AI automation, digital marketing, UI/UX design, and support services from Axione Solutions.',
+      description: 'Explore our AI, Web Development, UI/UX and Digital Marketing services.',
     },
   },
 
@@ -61,8 +66,7 @@ export const routes: Routes = [
     component: Blog,
     title: 'Technology & AI Blog | Axione Solutions',
     data: {
-      description:
-        'Explore insights and updates on Agentic AI, automation, web development, digital marketing and modern business technology.',
+      description: 'Latest insights on AI, Automation, Web Development and Technology.',
     },
   },
 
@@ -76,11 +80,11 @@ export const routes: Routes = [
     component: Contact,
     title: 'Contact Us | Axione Solutions',
     data: {
-      description:
-        'Contact Axione Solutions to discuss your web development, AI automation, digital marketing, UI/UX design or technology project.',
+      description: 'Contact Axione Solutions for your next digital project.',
     },
   },
 
+  // Admin Routes
   {
     path: 'admin/login',
     component: Login,
@@ -114,9 +118,25 @@ export const routes: Routes = [
       },
 
       {
+        path: 'blogs/edit/:id',
+        component: BlogForm,
+      },
+
+      {
         path: 'services',
         component: AdminServices,
       },
+
+      // ServiceForm baad me add hoga
+      // {
+      //   path: 'services/add',
+      //   component: ServiceForm,
+      // },
+
+      // {
+      //   path: 'services/edit/:id',
+      //   component: ServiceForm,
+      // },
 
       {
         path: 'contacts',
@@ -133,5 +153,10 @@ export const routes: Routes = [
         component: AdminChatbot,
       },
     ],
+  },
+
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];

@@ -52,13 +52,14 @@ export class Dashboard implements OnInit {
   loadStats() {
     this.api.getDashboardStats().subscribe({
       next: (res: any) => {
+        console.log('API Response', res);
+
         this.cards[0].value = res.blogs;
         this.cards[1].value = res.services;
         this.cards[2].value = res.contacts;
         this.cards[3].value = res.newsletter;
-      },
-      error: (error: any) => {
-        console.error('Dashboard Stats Error:', error);
+
+        console.log('Cards', this.cards);
       },
     });
   }

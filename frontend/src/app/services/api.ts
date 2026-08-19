@@ -129,8 +129,8 @@ export class Api {
 
   //dashboard API's
   getDashboardStats() {
-  return this.http.get(`${this.apiUrl}/dashboard/stats`, {
-    headers: this.getAuthHeaders(),
-  });
-}
+    return this.http.get<any>(`${this.apiUrl}/dashboard/stats`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 }
