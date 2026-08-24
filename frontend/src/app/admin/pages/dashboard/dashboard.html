@@ -4,22 +4,21 @@
 
     <p>Here's what's happening today.</p>
   </div>
-</section>
+  <div class="stats-grid">
+    @for (card of cards; track card.title) {
+      <div class="stat-card">
+        <div class="icon" [style.background]="card.color">
+          <i [class]="card.icon"></i>
+        </div>
 
-<section class="stats-grid">
-  @for (card of cards; track card.title) {
-    <div class="stat-card">
-      <div class="icon" [style.background]="card.color">
-        <i [class]="card.icon"></i>
+        <div class="content">
+          <h2>{{ card.value }}</h2>
+
+          <span>{{ card.title }}</span>
+        </div>
       </div>
-
-      <div class="content">
-        <h2>{{ card.value }}</h2>
-
-        <span>{{ card.title }}</span>
-      </div>
-    </div>
-  }
+    }
+  </div>
 </section>
 
 <section class="quick-actions">
@@ -32,7 +31,7 @@
       Add Blog
     </button>
 
-    <button routerLink="/admin/services">
+    <button routerLink="/admin/services/add">
       <i class="ri-briefcase-line"></i>
 
       Add Service

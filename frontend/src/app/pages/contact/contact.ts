@@ -15,16 +15,18 @@ export class Contact {
 
   name = '';
   email = '';
+  phone = '';
   subject = '';
   message = '';
 
   submitContact() {
     const name = this.name.trim();
     const email = this.email.trim();
+    const phone = this.phone.trim();
     const subject = this.subject.trim();
     const message = this.message.trim();
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !phone) {
       this.toastr.warning('Please fill all required fields.', 'Required Fields');
       return;
     }
@@ -32,6 +34,7 @@ export class Contact {
     const data = {
       name,
       email,
+      phone,
       subject,
       message,
     };
@@ -42,6 +45,7 @@ export class Contact {
 
         this.name = '';
         this.email = '';
+        this.phone = '';
         this.subject = '';
         this.message = '';
       },

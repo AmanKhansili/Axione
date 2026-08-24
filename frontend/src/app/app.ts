@@ -16,8 +16,19 @@ export class App {
   isAdmin = false;
 
   constructor(private router: Router) {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      this.isAdmin = this.router.url.startsWith('/admin');
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        const url = (event as NavigationEnd).urlAfterRedirects;
+
+        this.isAdmin = url.startsWith('/admin');
+
+        document.body.classList.toggle('admin-page', this.isAdmin);
+      });
+
+    // Initial page load
+    this.isAdmin = this.router.url.startsWith('/admin');
+
+    document.body.classList.toggle('admin-page', this.isAdmin);
   }
 }

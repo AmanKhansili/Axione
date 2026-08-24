@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Api } from '../../../services/api';
@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 export class Blogs implements OnInit {
   private api = inject(Api);
   private toastr = inject(ToastrService);
+  private cdr = inject(ChangeDetectorRef);
 
   blogs: any[] = [];
   filteredBlogs: any[] = [];
@@ -31,6 +32,7 @@ export class Blogs implements OnInit {
         this.blogs = response;
         this.filteredBlogs = response;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error(error);

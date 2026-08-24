@@ -6,11 +6,11 @@ header {
   transition: var(--transition);
   background: #ffffff00;
   backdrop-filter: blur(50px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.01);
 }
 
 header.scrolled {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow-sm);
 }

@@ -1,0 +1,36 @@
+<section class="service-form-page">
+  <div class="form-header">
+    <div>
+      <span class="eyebrow">CONTENT MANAGEMENT</span>
+      <h1>{{ isEdit ? 'Edit Service' : 'Add Service' }}</h1>
+      <p>{{ isEdit ? 'Update the service details shown on your website.' : 'Create a new service for the Axione website.' }}</p>
+    </div>
+    <button type="button" class="ghost-btn" (click)="cancel()"><i class="ri-arrow-left-line"></i> Back</button>
+  </div>
+
+  <form class="form-card" (ngSubmit)="saveService()">
+    <div class="card-heading">
+      <div class="heading-icon"><i class="ri-briefcase-4-line"></i></div>
+      <div><h2>Service details</h2><p>Keep the information clear and customer-focused.</p></div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field"><label>Service Title <span>*</span></label><input type="text" [(ngModel)]="service.title" name="title" (input)="generateSlug()" placeholder="AI Automation" /></div>
+      <div class="field"><label>Slug <span>*</span></label><input type="text" [(ngModel)]="service.slug" name="slug" placeholder="ai-automation" /></div>
+      <div class="field"><label>Remix Icon Class</label><input type="text" [(ngModel)]="service.icon" name="icon" placeholder="ri-robot-2-line" /></div>
+      <div class="field toggle-field"><label>Status</label><label class="toggle"><input type="checkbox" [(ngModel)]="service.isActive" name="isActive" /><span></span><b>{{ service.isActive ? 'Active' : 'Inactive' }}</b></label></div>
+      <div class="field full"><label>Short Description <span>*</span></label><textarea rows="3" [(ngModel)]="service.shortDescription" name="shortDescription" placeholder="A concise description for service cards..."></textarea></div>
+      <div class="field full"><label>Overview</label><textarea rows="5" [(ngModel)]="service.overview" name="overview" placeholder="Detailed service overview..."></textarea></div>
+      <div class="field full"><label>Features</label><input type="text" [(ngModel)]="featuresText" name="features" placeholder="Workflow automation, AI agents, Process optimization" /><small>Separate multiple items with commas.</small></div>
+      <div class="field full"><label>Technologies</label><input type="text" [(ngModel)]="technologiesText" name="technologies" placeholder="Angular, .NET, OpenAI, Supabase" /><small>Separate multiple items with commas.</small></div>
+      <div class="field full"><label>Benefits</label><input type="text" [(ngModel)]="benefitsText" name="benefits" placeholder="Lower cost, Faster delivery, Better scalability" /><small>Separate multiple items with commas.</small></div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="secondary-btn" (click)="cancel()">Cancel</button>
+      <button type="submit" class="primary-btn" [disabled]="isLoading">
+        @if (isLoading) { <span class="spinner"></span> Saving... } @else { <i class="ri-save-3-line"></i> {{ isEdit ? 'Update Service' : 'Create Service' }} }
+      </button>
+    </div>
+  </form>
+</section>

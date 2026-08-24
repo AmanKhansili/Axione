@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Api } from '../../../services/api';
@@ -15,58 +15,77 @@ import { DatePipe } from '@angular/common';
 export class Services implements OnInit {
   private api = inject(Api);
   private toastr = inject(ToastrService);
+  private cdr = inject(ChangeDetectorRef);
 
   services: any[] = [];
   filteredServices: any[] = [];
 
   search = '';
-
   loading = true;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadServices();
   }
 
-  loadServices() {
-    this.api.getServices().subscribe({
+  loadServices(): void {
+    this.loading = true;
+
+    this.api.getAdminServices().subscribe({
       next: (response: any) => {
-        this.services = response;
-        this.filteredServices = response;
+        this.services = Array.isArray(response) ? response : [];
+        this.filteredServices = [...this.services];
         this.loading = false;
+
+        // Force the view to update after API response
+        this.cdr.detectChanges();
       },
 
       error: (error) => {
-        console.error(error);
+        console.error('Admin Services Error:', error);
+
+        this.services = [];
+        this.filteredServices = [];
         this.loading = false;
+
+        this.cdr.detectChanges();
       },
     });
   }
 
-  searchServices() {
+  searchServices(): void {
     const value = this.search.toLowerCase().trim();
 
-    this.filteredServices = this.services.filter(
-      (service) =>
-        service.title.toLowerCase().includes(value) ||
-        service.shortDescription.toLowerCase().includes(value),
-    );
+    this.filteredServices = this.services.filter((service) => {
+      const title = service?.title?.toLowerCase() ?? '';
+      const description = service?.shortDescription?.toLowerCase() ?? '';
+
+      return title.includes(value) || description.includes(value);
+    });
+
+    this.cdr.detectChanges();
   }
 
-  deleteService(id: string) {
+  deleteService(id: string): void {
     if (!confirm('Delete this service?')) {
       return;
     }
 
     this.api.deleteService(id).subscribe({
       next: (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(response.message || 'Service deleted successfully');
 
         this.services = this.services.filter((x) => x.id !== id);
         this.filteredServices = this.filteredServices.filter((x) => x.id !== id);
+
+        this.cdr.detectChanges();
       },
 
       error: (error) => {
-        this.toastr.error(error.error.message);
+        console.error('Delete Service Error:', error);
+
+        this.toastr.error(error?.error?.message || 'Unable to delete service');
+
+        this.cdr.detectChanges();
       },
     });
   }

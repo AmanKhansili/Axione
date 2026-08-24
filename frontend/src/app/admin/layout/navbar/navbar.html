@@ -1,33 +1,14 @@
 <header class="navbar">
   <div class="navbar-left">
-    <div class="page-title">
-      <h1>{{ pageTitle }}</h1>
-
-      <p>Welcome back, {{ admin.name }}</p>
+    <div>
+      <h3>{{ pageTitle }}</h3>
+      <p>Axione Solutions Admin Portal</p>
     </div>
   </div>
-
   <div class="navbar-right">
-    <div class="search-box">
-      <i class="ri-search-line"></i>
-
-      <input type="text" placeholder="Search..." />
-    </div>
-
-    <button class="icon-btn">
-      <i class="ri-notification-3-line"></i>
-    </button>
-
     <div class="profile">
-      <div class="avatar">
-        {{ admin.name?.charAt(0) }}
-      </div>
-
-      <div>
-        <h4>{{ admin.name }}</h4>
-
-        <span>Administrator</span>
-      </div>
+      <div class="avatar">{{ (admin.name || 'A').charAt(0).toUpperCase() }}</div>
+      <div><strong>{{ admin.name || 'Administrator' }}</strong><span>{{ admin.email || 'Admin account' }}</span></div>
     </div>
   </div>
 </header>

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Api } from '../../../services/api';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,22 +11,23 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Sidebar {
   private router = inject(Router);
+  private api = inject(Api);
 
   blogOpen = false;
   serviceOpen = false;
 
-  toggleBlogs() {
+  toggleBlogs(): void {
     this.blogOpen = !this.blogOpen;
   }
 
-  toggleServices() {
+  toggleServices(): void {
     this.serviceOpen = !this.serviceOpen;
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('admin');
-
-    this.router.navigate(['/admin/login']);
+  logout(): void {
+    this.api.logout().subscribe({
+      next: () => this.router.navigate(['/admin/login']),
+      error: () => this.router.navigate(['/admin/login']),
+    });
   }
 }

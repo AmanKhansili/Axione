@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Api } from '../../../services/api';
 
@@ -12,6 +12,7 @@ import { Api } from '../../../services/api';
 export class Dashboard implements OnInit {
   admin: any = {};
   private api = inject(Api);
+  private cdr = inject(ChangeDetectorRef);
 
   cards = [
     {
@@ -58,6 +59,7 @@ export class Dashboard implements OnInit {
         this.cards[1].value = res.services;
         this.cards[2].value = res.contacts;
         this.cards[3].value = res.newsletter;
+        this.cdr.detectChanges();
 
         console.log('Cards', this.cards);
       },

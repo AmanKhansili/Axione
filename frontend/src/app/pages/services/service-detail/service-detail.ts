@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Api } from '../../../services/api';
 
@@ -12,6 +13,7 @@ import { Api } from '../../../services/api';
 export class ServiceDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private api = inject(Api);
+  private cdr = inject(ChangeDetectorRef);
 
   service: any = null;
   loading = true;
@@ -21,27 +23,52 @@ export class ServiceDetail implements OnInit {
       const slug = params.get('slug');
 
       if (!slug) {
+        this.service = null;
         this.loading = false;
+
+        this.cdr.detectChanges();
         return;
       }
 
-      this.getService(slug);
-    });
-  }
+      // Show loading while new service is being loaded
+      this.loading = true;
+      this.service = null;
 
-  getService(slug: string): void {
-    this.api.getServiceBySlug(slug).subscribe({
-      next: (response: any) => {
-        this.service = response;
-        this.loading = false;
-      },
+      this.cdr.detectChanges();
 
-      error: (error) => {
-        console.error('Service Detail Error:', error);
+      this.api.getServiceBySlug(slug).subscribe({
+        next: (response: any) => {
+          console.log('Service loaded:', response);
 
-        this.service = null;
-        this.loading = false;
-      },
+          this.service = response;
+          this.loading = false;
+
+          // Force Angular to update the UI immediately
+          this.cdr.detectChanges();
+
+          // Start the new detail page from top
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'auto',
+          });
+        },
+
+        error: (error) => {
+          console.error('Service Detail Error:', error);
+
+          this.service = null;
+          this.loading = false;
+
+          this.cdr.detectChanges();
+
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'auto',
+          });
+        },
+      });
     });
   }
 }

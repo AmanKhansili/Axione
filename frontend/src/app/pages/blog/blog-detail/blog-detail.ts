@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Api } from '../../../services/api';
 
@@ -9,14 +9,14 @@ import { Api } from '../../../services/api';
   templateUrl: './blog-detail.html',
   styleUrl: './blog-detail.scss',
 })
-export class BlogDetail {
+export class BlogDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private api = inject(Api);
 
   blog: any = null;
   loading = true;
 
-  ngOnInit() {
+  ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
 
     if (!slug) {
@@ -24,10 +24,22 @@ export class BlogDetail {
       return;
     }
 
-    this.api.getBlogBySlug(slug).subscribe({
-      next: (response: any) => {
-        this.blog = response;
+    this.api.getBlogs().subscribe({
+      next: (blogs: any[]) => {
+        this.blog = blogs.find((blog) => blog.slug === slug) ?? null;
+
         this.loading = false;
+
+        setTimeout(() => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'auto',
+          });
+
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 0);
       },
 
       error: (error) => {

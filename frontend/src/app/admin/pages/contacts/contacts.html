@@ -2,7 +2,6 @@
   <div class="page-header">
     <div>
       <h1>Contacts</h1>
-
       <p>Manage all customer enquiries.</p>
     </div>
   </div>
@@ -23,15 +22,10 @@
       <thead>
         <tr>
           <th>Name</th>
-
-          <th>Email</th>
-
-          <th>Phone</th>
-
+          <th>Contact Info</th>
           <th>Subject</th>
-
+          <th>Message</th>
           <th>Date</th>
-
           <th>Action</th>
         </tr>
       </thead>
@@ -40,18 +34,52 @@
         @if (!loading) {
           @for (contact of filteredContacts; track contact.id) {
             <tr>
-              <td>{{ contact.name }}</td>
-
-              <td>{{ contact.email }}</td>
-
-              <td>{{ contact.phone || '-' }}</td>
-
-              <td>{{ contact.subject || '-' }}</td>
-
-              <td>{{ contact.createdAt | date: 'dd MMM yyyy' }}</td>
-
+              <!-- NAME -->
               <td>
-                <button class="delete" (click)="deleteContact(contact.id)">
+                <strong>{{ contact.name }}</strong>
+              </td>
+
+              <!-- CONTACT INFO -->
+              <td class="contact-info">
+                <div>
+                  <i class="ri-mail-line"></i>
+                  <span>{{ contact.email }}</span>
+                </div>
+
+                @if (contact.phone) {
+                  <div>
+                    <i class="ri-phone-line"></i>
+                    <span>{{ contact.phone }}</span>
+                  </div>
+                }
+              </td>
+
+              <!-- SUBJECT -->
+              <td>
+                {{ contact.subject || '-' }}
+              </td>
+
+              <!-- MESSAGE -->
+              <td class="message-cell">
+                <div [class.expanded]="expandedContactId === contact.id">
+                  {{ contact.message || '-' }}
+                </div>
+
+                @if (contact.message && contact.message.length > 100) {
+                  <button type="button" class="view-more" (click)="toggleMessage(contact.id)">
+                    {{ expandedContactId === contact.id ? 'View Less' : 'View More' }}
+                  </button>
+                }
+              </td>
+
+              <!-- DATE -->
+              <td>
+                {{ contact.createdAt | date: 'dd MMM yyyy' }}
+              </td>
+
+              <!-- ACTION -->
+              <td>
+                <button class="delete" type="button" (click)="deleteContact(contact.id)">
                   <i class="ri-delete-bin-6-line"></i>
                 </button>
               </td>

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Api } from '../../../services/api';
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class Newsletter implements OnInit {
   private api = inject(Api);
   private toastr = inject(ToastrService);
+  private cdr = inject(ChangeDetectorRef);
 
   subscribers: any[] = [];
   filteredSubscribers: any[] = [];
@@ -31,6 +32,7 @@ export class Newsletter implements OnInit {
         this.subscribers = response;
         this.filteredSubscribers = response;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error: any) => {
         this.loading = false;

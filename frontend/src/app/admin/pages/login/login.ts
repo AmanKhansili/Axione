@@ -19,39 +19,37 @@ export class Login implements OnInit {
   email = '';
   password = '';
   isLoading = false;
+  showPassword = false;
 
-  ngOnInit() {
-    const token = localStorage.getItem('token');
-
-    if (token) {
+  ngOnInit(): void {
+    if (this.api.isAuthenticated()) {
       this.router.navigate(['/admin']);
     }
   }
 
-  login() {
-    if (!this.email || !this.password) {
+  login(): void {
+    if (!this.email.trim() || !this.password) {
       this.toastr.warning('Please enter email and password');
       return;
     }
 
     this.isLoading = true;
 
-    this.api.login(this.email, this.password).subscribe({
+    this.api.login(this.email.trim(), this.password).subscribe({
       next: (response: any) => {
         this.isLoading = false;
-
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('admin', JSON.stringify(response.admin));
-
-        this.toastr.success(response.message);
-
+        this.toastr.success('Login successful');
         this.router.navigate(['/admin']);
       },
-
       error: (error) => {
         this.isLoading = false;
-        this.toastr.error(error.error.message);
+        const message = error?.error?.msg || error?.error?.message || 'Invalid email or password';
+        this.toastr.error(message);
       },
     });
+  }
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,7 @@ import { Api } from '../../../services/api';
 export class Contacts implements OnInit {
   private api = inject(Api);
   private toastr = inject(ToastrService);
+  private cdr = inject(ChangeDetectorRef);
 
   contacts: any[] = [];
   filteredContacts: any[] = [];
@@ -26,12 +27,19 @@ export class Contacts implements OnInit {
     this.loadContacts();
   }
 
+  expandedContactId: string | null = null;
+
+  toggleMessage(id: string): void {
+    this.expandedContactId = this.expandedContactId === id ? null : id;
+  }
+
   loadContacts() {
     this.api.getContacts().subscribe({
       next: (response: any) => {
         this.contacts = response;
         this.filteredContacts = response;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         this.loading = false;
