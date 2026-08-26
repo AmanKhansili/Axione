@@ -283,3 +283,35 @@
     </div>
   </div>
 </section>
+
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">FAQ</span>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <p>
+        Find answers to some of the most common questions about Axione Solutions and our services.
+      </p>
+    </div>
+
+    <div class="faq-list">
+      @for (faq of faqs; track faq.question; let i = $index) {
+        <div class="faq-item" [class.active]="activeFaq === i">
+          <button type="button" class="faq-question" (click)="toggleFaq(i)">
+            <span>{{ faq.question }}</span>
+
+            <i [class]="activeFaq === i ? 'ri-subtract-line' : 'ri-add-line'"></i>
+          </button>
+
+          @if (activeFaq === i) {
+            <div class="faq-answer">
+              <p>{{ faq.answer }}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -63,7 +63,6 @@
   100% {
     transform: translateY(0);
   }
-
   50% {
     transform: translateY(-12px);
   }
@@ -72,7 +71,6 @@
   .service-hero .container {
     gap: 50px;
   }
-
   .service-right img {
     max-width: 460px;
     place-self: center;
@@ -83,26 +81,21 @@
   .service-hero {
     padding: calc(var(--header-height) + 40px) 0 80px;
   }
-
   .service-hero .container {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 60px;
   }
-
   .service-left {
     order: 2;
   }
-
   .service-right {
     order: 1;
   }
-
   .service-left h1,
   .service-left p {
     max-width: 100%;
   }
-
   .hero-feature {
     display: flex;
     flex-wrap: wrap;
@@ -115,16 +108,13 @@
   .service-hero {
     padding: calc(var(--header-height) + 30px) 0 70px;
   }
-
   .hero-feature {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-
   .hero-feature div {
     justify-content: center;
   }
-
   .service-right img {
     max-width: 380px;
   }
@@ -134,7 +124,6 @@
   .service-right img {
     max-width: 300px;
   }
-
   .service-left .btn {
     width: 100%;
     justify-content: center;
@@ -228,16 +217,13 @@
     grid-template-columns: 1fr;
     gap: 50px;
   }
-
   .web-image {
     order: 1;
   }
-
   .web-content {
     order: 2;
     text-align: center;
   }
-
   .web-content p {
     max-width: 100%;
   }
@@ -253,7 +239,6 @@
   .web-image img {
     max-width: 320px;
   }
-
   .tech-item {
     padding: 16px;
   }
@@ -338,7 +323,6 @@
   .digital-marketing .container {
     gap: 50px;
   }
-
   .marketing-image img {
     max-width: 520px;
   }
@@ -349,21 +333,17 @@
     grid-template-columns: 1fr;
     gap: 60px;
   }
-
   .marketing-content {
     order: 2;
     text-align: center;
   }
-
   .marketing-content h2,
   .marketing-content > p {
     max-width: 100%;
   }
-
   .marketing-image {
     order: 1;
   }
-
   .marketing-image img {
     max-width: 500px;
   }
@@ -373,7 +353,6 @@
   .marketing-grid {
     grid-template-columns: 1fr;
   }
-
   .marketing-item {
     min-height: auto;
     padding: 22px;
@@ -385,15 +364,12 @@
     gap: 15px;
     padding: 20px;
   }
-
   .marketing-item i {
     font-size: 32px;
   }
-
   .marketing-item h4 {
     font-size: 1.2rem;
   }
-
   .marketing-image img {
     max-width: 320px;
   }
@@ -462,7 +438,6 @@
   .why-grid {
     grid-template-columns: 1fr;
   }
-
   .why-card {
     padding: 35px 25px;
   }
@@ -552,15 +527,12 @@
   .consult-left {
     text-align: center;
   }
-
   .consult-points {
     justify-content: center;
   }
-
   .consult-points div {
     justify-content: center;
   }
-
   .consult-form {
     max-width: 650px;
     margin: auto;
@@ -702,15 +674,12 @@
   .services-grid {
     grid-template-columns: 1fr;
   }
-
   .service-card {
     padding: 28px;
   }
-
   .section-title {
     margin-bottom: 40px;
   }
-
   .service-card h3 {
     font-size: 1.3rem;
   }

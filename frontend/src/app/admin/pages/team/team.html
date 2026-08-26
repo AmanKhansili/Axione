@@ -28,7 +28,6 @@
         <tr>
           <th>Member</th>
           <th>Designation</th>
-          <th>Email</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -41,31 +40,27 @@
           </tr>
         } @else if (filteredMembers.length === 0) {
           <tr>
-            <td colspan="5" class="empty-state">No team members found.</td>
+            <td colspan="4" class="empty-state">No team members found.</td>
           </tr>
         } @else {
           @for (member of filteredMembers; track member.id) {
             <tr>
               <td>
                 <div class="member-info">
-                  <img [src]="member.image || '/team/default.webp'" [alt]="member.name" />
+                  <img
+                    [src]="member.image || '/team/default.webp'"
+                    [alt]="member.name"
+                    class="member-image"
+                  />
 
                   <div>
-                    <strong>{{ member.name }}</strong>
-
-                    @if (member.email) {
-                      <small>{{ member.email }}</small>
-                    }
+                    <strong class="member-name">{{ member.name }}</strong>
                   </div>
                 </div>
               </td>
 
-              <td>
+              <td class="designation">
                 {{ member.designation || '-' }}
-              </td>
-
-              <td>
-                {{ member.email || '-' }}
               </td>
 
               <td>

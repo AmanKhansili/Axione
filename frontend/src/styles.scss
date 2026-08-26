@@ -6,164 +6,95 @@
      Logo Colors:
      #705EE6
      #D5CFFF
-  ========================================================= */
-
-  /* =========================================================
+  ========================================================= */ /* =========================================================
      BRAND COLORS
   ========================================================= */
-
   --primary: #6346d8;
-
   --primary-logo: #705ee6;
-
   --primary-light: #806ef0;
-
   --primary-bright: #927ff5;
-
   --primary-dark: #4526a8;
-
   --primary-deep: #321878;
-
   --lavender: #c4bbff;
-
-  --lavender-light: #d5cfff;
-
-  /* =========================================================
+  --lavender-light: #d5cfff; /* =========================================================
      DARK BRAND
   ========================================================= */
-
   --secondary: #15132d;
-
   --secondary-light: #211d43;
-
-  --secondary-soft: #302a58;
-
-  /* =========================================================
+  --secondary-soft: #302a58; /* =========================================================
      BACKGROUNDS
   ========================================================= */
-
   --bg: #f8f7fd;
-
   --surface: #ffffff;
-
   --section: #f1efff;
-
   --section-soft: #f6f4ff;
-
-  --section-dark: #17132f;
-
-  /* =========================================================
+  --section-dark: #17132f; /* =========================================================
      TEXT
   ========================================================= */
-
   --text: #17152f;
-
   --text-light: #5f5c73;
-
   --text-muted: #88859a;
-
-  --text-white: #ffffff;
-
-  /* =========================================================
+  --text-white: #ffffff; /* =========================================================
      BORDERS
   ========================================================= */
-
   --border: #e5e1f5;
-
   --border-light: #eeeaf9;
-
-  --border-purple: rgba(99, 70, 216, 0.2);
-
-  /* =========================================================
+  --border-purple: rgba(
+    99,
+    70,
+    216,
+    0.2
+  ); /* =========================================================
      PREMIUM GRADIENTS
   ========================================================= */
-
   --gradient: linear-gradient(135deg, #4526a8 0%, #6346d8 45%, #806ef0 100%);
-
   --gradient-primary: linear-gradient(135deg, #6346d8 0%, #806ef0 100%);
-
   --gradient-light: linear-gradient(135deg, #f1efff 0%, #e5e0ff 100%);
-
-  --gradient-dark: linear-gradient(135deg, #15132d 0%, #241750 55%, #321878 100%);
-
-  /* =========================================================
+  --gradient-dark: linear-gradient(
+    135deg,
+    #15132d 0%,
+    #241750 55%,
+    #321878 100%
+  ); /* =========================================================
      RADIUS
   ========================================================= */
-
   --radius-sm: 8px;
-
   --radius-md: 12px;
-
   --radius-lg: 18px;
-
   --radius-xl: 24px;
-
-  --radius-round: 999px;
-
-  /* =========================================================
+  --radius-round: 999px; /* =========================================================
      SHADOWS
   ========================================================= */
-
   --shadow-sm: 0 5px 15px rgba(21, 19, 45, 0.07);
-
   --shadow-md: 0 12px 35px rgba(21, 19, 45, 0.09);
-
   --shadow-lg: 0 20px 50px rgba(21, 19, 45, 0.13);
-
   --shadow-purple: 0 15px 40px rgba(99, 70, 216, 0.25);
-
   --shadow-purple-lg: 0 22px 55px rgba(99, 70, 216, 0.32);
-
-  --shadow-purple-soft: 0 10px 30px rgba(99, 70, 216, 0.15);
-
-  /* =========================================================
+  --shadow-purple-soft: 0 10px 30px rgba(99, 70, 216, 0.15); /* =========================================================
      TRANSITION
   ========================================================= */
-
-  --transition: 0.35s ease;
-
-  /* =========================================================
+  --transition: 0.35s ease; /* =========================================================
      LAYOUT
   ========================================================= */
-
   --container: 1320px;
-
   --header-height: 90px;
-
-  --section-space: 70px;
-
-  /* =========================================================
+  --section-space: 70px; /* =========================================================
      ADMIN THEME
   ========================================================= */
-
   --admin-bg: #f8f7fd;
-
   --admin-surface: #ffffff;
-
   --admin-sidebar: #15132d;
-
   --admin-sidebar-hover: #241750;
-
   --admin-border: #e5e1f5;
-
   --admin-title: #15132d;
-
   --admin-text: #5f5c73;
-
   --admin-muted: #88859a;
-
   --admin-success: #10b981;
-
   --admin-warning: #f59e0b;
-
   --admin-danger: #ef4444;
-
   --admin-info: #6346d8;
-
   --admin-shadow: 0 10px 30px rgba(21, 19, 45, 0.09);
-
   --admin-shadow-hover: 0 20px 45px rgba(21, 19, 45, 0.14);
-
   --admin-transition: 0.3s ease;
 }
 
@@ -193,9 +124,7 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-
   background: var(--bg);
-
   color: var(--text);
 }
 
@@ -209,7 +138,6 @@ body:not(.admin-page) {
 
 img {
   max-width: 100%;
-
   display: block;
 }
 
@@ -219,7 +147,6 @@ img {
 
 a {
   text-decoration: none;
-
   color: inherit;
 }
 
@@ -229,13 +156,9 @@ a {
 
 button {
   border: none;
-
   outline: none;
-
   cursor: pointer;
-
   font-family: inherit;
-
   background: transparent;
 }
 
@@ -256,7 +179,6 @@ input,
 textarea,
 select {
   font-family: inherit;
-
   outline: none;
 }
 
@@ -266,7 +188,6 @@ select {
 
 .container {
   width: min(var(--container), 92%);
-
   margin-inline: auto;
 }
 
@@ -284,19 +205,14 @@ section {
 
 .section-title {
   font-size: clamp(2rem, 5vw, 3rem);
-
   font-weight: 700;
-
   color: var(--secondary);
-
   margin-bottom: 18px;
 }
 
 .section-subtitle {
   max-width: 650px;
-
   color: var(--text-light);
-
   line-height: 1.8;
 }
 
@@ -306,19 +222,12 @@ section {
 
 .btn {
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 10px;
-
   padding: 14px 34px;
-
   border-radius: var(--radius-round);
-
   font-weight: 600;
-
   transition: var(--transition);
 }
 
@@ -328,15 +237,12 @@ section {
 
 .btn-primary {
   background: var(--gradient);
-
   color: #ffffff;
-
   box-shadow: var(--shadow-purple);
 }
 
 .btn-primary:hover {
   transform: translateY(-4px);
-
   box-shadow: var(--shadow-purple-lg);
 }
 
@@ -346,21 +252,15 @@ section {
 
 .btn-outline {
   border: 2px solid var(--primary);
-
   color: var(--primary);
-
   background: transparent;
 }
 
 .btn-outline:hover {
   background: var(--gradient-primary);
-
   border-color: transparent;
-
   color: #ffffff;
-
   box-shadow: var(--shadow-purple-soft);
-
   transform: translateY(-2px);
 }
 
@@ -370,31 +270,20 @@ section {
 
 .btn-secondary {
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 8px;
-
   padding: 14px 28px;
-
   background: transparent;
-
   color: var(--primary);
-
   font-size: 16px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: var(--transition);
 }
 
 .btn-secondary:hover {
   color: var(--primary-dark);
-
   transform: translateX(4px);
 }
 
@@ -404,21 +293,13 @@ section {
 
 .section-badge {
   display: inline-flex;
-
   align-items: center;
-
   padding: 10px 18px;
-
   border-radius: var(--radius-round);
-
   background: rgba(99, 70, 216, 0.1);
-
   color: var(--primary);
-
   border: 1px solid rgba(99, 70, 216, 0.16);
-
   font-size: 14px;
-
   font-weight: 600;
 }
 

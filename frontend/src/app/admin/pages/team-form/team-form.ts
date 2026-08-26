@@ -21,15 +21,18 @@ export class TeamForm implements OnInit {
   memberId = '';
   isLoading = false;
 
+  selectedImage: File | null = null;
+  imagePreview = '';
+
   member = {
     name: '',
     designation: '',
     description: '',
     image: '',
-    email: '',
     linkedin: '',
     github: '',
     isActive: true,
+    displayOrder: 0,
   };
 
   ngOnInit(): void {
@@ -39,6 +42,36 @@ export class TeamForm implements OnInit {
     if (this.isEdit) {
       this.loadMember();
     }
+  }
+
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+
+    const file = input.files[0];
+
+    if (!file.type.startsWith('image/')) {
+      this.toastr.warning('Please select a valid image');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      this.toastr.warning('Image size should be less than 5MB');
+      return;
+    }
+
+    this.selectedImage = file;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
   }
 
   loadMember(): void {
@@ -57,17 +90,20 @@ export class TeamForm implements OnInit {
           designation: data.designation || '',
           description: data.description || '',
           image: data.image || '',
-          email: data.email || '',
           linkedin: data.linkedin || '',
           github: data.github || '',
           isActive: data.isActive !== false,
+          displayOrder: Number(data.displayOrder ?? 0),
         };
+
+        this.imagePreview = this.member.image;
 
         this.isLoading = false;
       },
 
       error: (error) => {
         console.error('Load Team Member Error:', error);
+
         this.isLoading = false;
 
         this.toastr.error(error?.error?.message || 'Unable to load team member');
@@ -85,42 +121,69 @@ export class TeamForm implements OnInit {
       return;
     }
 
-    const payload = {
-      name: this.member.name.trim(),
-      designation: this.member.designation.trim(),
-      description: this.member.description.trim(),
-      image: this.member.image.trim(),
-      email: this.member.email.trim(),
-      linkedin: this.member.linkedin.trim(),
-      github: this.member.github.trim(),
-      isActive: this.member.isActive,
-    };
+    if (this.member.displayOrder < 1) {
+      this.toastr.warning('Display order must be greater than 0');
+      return;
+    }
 
     this.isLoading = true;
 
-    const request = this.isEdit
-      ? this.api.updateTeamMember(this.memberId, payload)
-      : this.api.createTeamMember(payload);
+    const saveMemberData = (imageUrl: string) => {
+      const payload = {
+        name: this.member.name.trim(),
+        designation: this.member.designation.trim(),
+        description: this.member.description.trim(),
+        image: imageUrl,
+        linkedin: this.member.linkedin.trim(),
+        github: this.member.github.trim(),
+        isActive: this.member.isActive,
+        displayOrder: Number(this.member.displayOrder),
+      };
 
-    request.subscribe({
-      next: (response: any) => {
-        this.isLoading = false;
+      const request = this.isEdit
+        ? this.api.updateTeamMember(this.memberId, payload)
+        : this.api.createTeamMember(payload);
 
-        this.toastr.success(response?.message || 'Team member saved successfully');
+      request.subscribe({
+        next: (response: any) => {
+          this.isLoading = false;
 
-        this.router.navigate(['/admin/team']);
-      },
+          this.toastr.success(response?.message || 'Team member saved successfully');
 
-      error: (error) => {
-        this.isLoading = false;
+          this.router.navigate(['/admin/team']);
+        },
 
-        console.error('Save Team Member Error:', error);
+        error: (error) => {
+          this.isLoading = false;
 
-        this.toastr.error(
-          error?.error?.message || error?.error?.msg || 'Unable to save team member',
-        );
-      },
-    });
+          console.error('Save Team Member Error:', error);
+
+          this.toastr.error(
+            error?.error?.message || error?.error?.msg || 'Unable to save team member',
+          );
+        },
+      });
+    };
+
+    // New image selected
+    if (this.selectedImage) {
+      this.api.uploadTeamImage(this.selectedImage).subscribe({
+        next: (result: any) => {
+          saveMemberData(result.url);
+        },
+
+        error: (error) => {
+          this.isLoading = false;
+
+          console.error('Team Image Upload Error:', error);
+
+          this.toastr.error(error?.error?.message || 'Unable to upload team image');
+        },
+      });
+    } else {
+      // Existing image / no image
+      saveMemberData(this.member.image || '');
+    }
   }
 
   cancel(): void {

@@ -399,7 +399,8 @@ export class Api {
     const params = new HttpParams()
       .set('select', '*')
       .set('isActive', 'eq.true')
-      .set('order', 'createdAt.asc');
+      .set('order', 'createdAt.asc')
+      .set('order', 'displayOrder.asc');
 
     return this.http.get<any[]>(`${this.restUrl}/Team`, {
       headers: this.getSupabaseHeaders(),
@@ -408,7 +409,10 @@ export class Api {
   }
 
   getAdminTeamMembers() {
-    const params = new HttpParams().set('select', '*').set('order', 'createdAt.asc');
+    const params = new HttpParams()
+      .set('select', '*')
+      .set('order', 'createdAt.asc')
+      .set('order', 'displayOrder.asc');
 
     return this.http.get<any[]>(`${this.restUrl}/Team`, {
       headers: this.authHeaders(),
@@ -474,6 +478,62 @@ export class Api {
         map(() => ({
           message: 'Team member deleted successfully',
         })),
+      );
+  }
+
+  // =====================================================
+  // Team Image / Supabase Storage APIs
+  // =====================================================
+
+  uploadTeamImage(file: File) {
+    const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+    const fileName = `team-${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2, 8)}.${extension}`;
+
+    const filePath = fileName;
+
+    const headers = new HttpHeaders({
+      apikey: this.supabaseKey,
+      Authorization: `Bearer ${this.getAccessToken() || this.supabaseKey}`,
+      'Content-Type': file.type || 'application/octet-stream',
+      'x-upsert': 'true',
+    });
+
+    return this.http
+      .post(`${this.supabaseUrl}/storage/v1/object/team-images/${filePath}`, file, {
+        headers,
+        responseType: 'json',
+      })
+      .pipe(
+        map(() => ({
+          fileName,
+          filePath,
+          url: `${this.supabaseUrl}/storage/v1/object/public/team-images/${filePath}`,
+        })),
+      );
+  }
+
+  deleteTeamImage(fileName: string) {
+    if (!fileName) {
+      return of(null);
+    }
+
+    const headers = new HttpHeaders({
+      apikey: this.supabaseKey,
+      Authorization: `Bearer ${this.getAccessToken() || this.supabaseKey}`,
+      'Content-Type': 'application/json',
+    });
+
+    return this.http
+      .delete(`${this.supabaseUrl}/storage/v1/object/team-images/${fileName}`, {
+        headers,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Delete Team Image Error:', error);
+          return of(null);
+        }),
       );
   }
 

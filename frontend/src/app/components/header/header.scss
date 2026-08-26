@@ -172,11 +172,9 @@ header.scrolled {
   .menu-toggle {
     display: flex;
   }
-
   .header-actions .btn {
     display: none;
   }
-
   .nav-menu {
     position: fixed;
     top: var(--header-height);
@@ -191,7 +189,6 @@ header.scrolled {
     box-shadow: var(--shadow-lg);
     transition: 0.4s;
   }
-
   .nav-menu.active {
     right: 0;
   }
