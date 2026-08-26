@@ -1,0 +1,101 @@
+<section class="team-page">
+  <div class="page-header">
+    <div>
+      <h1>Team Members</h1>
+      <p>Manage your Axione Solutions team members.</p>
+    </div>
+
+    <a routerLink="/admin/team/add" class="btn">
+      <i class="ri-add-line"></i>
+      Add Member
+    </a>
+  </div>
+
+  <div class="search-box">
+    <i class="ri-search-line"></i>
+
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (input)="searchTeam()"
+      placeholder="Search team member..."
+    />
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Member</th>
+          <th>Designation</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (loading) {
+          <tr>
+            <td colspan="5" class="empty-state">Loading team members...</td>
+          </tr>
+        } @else if (filteredMembers.length === 0) {
+          <tr>
+            <td colspan="5" class="empty-state">No team members found.</td>
+          </tr>
+        } @else {
+          @for (member of filteredMembers; track member.id) {
+            <tr>
+              <td>
+                <div class="member-info">
+                  <img [src]="member.image || '/team/default.webp'" [alt]="member.name" />
+
+                  <div>
+                    <strong>{{ member.name }}</strong>
+
+                    @if (member.email) {
+                      <small>{{ member.email }}</small>
+                    }
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                {{ member.designation || '-' }}
+              </td>
+
+              <td>
+                {{ member.email || '-' }}
+              </td>
+
+              <td>
+                @if (member.isActive) {
+                  <span class="status published">Active</span>
+                } @else {
+                  <span class="status draft">Inactive</span>
+                }
+              </td>
+
+              <td>
+                <div class="actions">
+                  <a [routerLink]="['/admin/team/edit', member.id]" title="Edit">
+                    <i class="ri-edit-line"></i>
+                  </a>
+
+                  <button
+                    class="delete"
+                    type="button"
+                    (click)="deleteTeamMember(member.id)"
+                    title="Delete"
+                  >
+                    <i class="ri-delete-bin-6-line"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

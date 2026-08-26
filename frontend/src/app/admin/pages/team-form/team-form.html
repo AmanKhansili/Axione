@@ -1,0 +1,116 @@
+<section class="team-form-page">
+  <div class="page-header">
+    <div>
+      <h1>{{ isEdit ? 'Edit Team Member' : 'Add Team Member' }}</h1>
+
+      <p>
+        {{ isEdit ? 'Update team member information.' : 'Add a new member to your team.' }}
+      </p>
+    </div>
+  </div>
+
+  <form class="form-card" (ngSubmit)="saveMember()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Name *</label>
+
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="member.name"
+          placeholder="Enter name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Designation *</label>
+
+        <input
+          type="text"
+          name="designation"
+          [(ngModel)]="member.designation"
+          placeholder="e.g. Senior Consultant"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="member.email"
+          placeholder="member@example.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Image URL</label>
+
+        <input
+          type="text"
+          name="image"
+          [(ngModel)]="member.image"
+          placeholder="/team/member-1.webp"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>LinkedIn URL</label>
+
+        <input
+          type="url"
+          name="linkedin"
+          [(ngModel)]="member.linkedin"
+          placeholder="https://linkedin.com/in/..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label>GitHub URL</label>
+
+        <input
+          type="url"
+          name="github"
+          [(ngModel)]="member.github"
+          placeholder="https://github.com/..."
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description *</label>
+
+      <textarea
+        rows="5"
+        name="description"
+        [(ngModel)]="member.description"
+        placeholder="Write a short description..."
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" name="isActive" [(ngModel)]="member.isActive" />
+
+        Active
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+
+      <button type="submit" class="save-btn" [disabled]="isLoading">
+        @if (isLoading) {
+          <span>Saving...</span>
+        } @else {
+          <i class="ri-save-line"></i>
+          {{ isEdit ? 'Update Member' : 'Add Member' }}
+        }
+      </button>
+    </div>
+  </form>
+</section>

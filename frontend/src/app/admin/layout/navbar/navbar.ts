@@ -21,7 +21,7 @@ export class Navbar {
     if (url.includes('services')) return 'Services';
     if (url.includes('contacts')) return 'Contacts';
     if (url.includes('newsletter')) return 'Newsletter';
-    if (url.includes('chatbot')) return 'AI Chatbot';
+    if (url.includes('team')) return 'Axione Team Members';
 
     return 'Dashboard';
   }

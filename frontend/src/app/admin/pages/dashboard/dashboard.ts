@@ -39,6 +39,12 @@ export class Dashboard implements OnInit {
       icon: 'ri-mail-send-line',
       color: '#f59e0b',
     },
+    {
+      title: 'Team',
+      value: 0,
+      icon: 'ri-team-line',
+      color: '#8b5cf6',
+    },
   ];
 
   ngOnInit() {
@@ -59,6 +65,7 @@ export class Dashboard implements OnInit {
         this.cards[1].value = res.services;
         this.cards[2].value = res.contacts;
         this.cards[3].value = res.newsletter;
+        this.cards[4].value = res.team;
         this.cdr.detectChanges();
 
         console.log('Cards', this.cards);

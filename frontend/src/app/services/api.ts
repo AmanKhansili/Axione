@@ -392,6 +392,92 @@ export class Api {
   }
 
   // =====================================================
+  // Team APIs
+  // =====================================================
+
+  getTeamMembers() {
+    const params = new HttpParams()
+      .set('select', '*')
+      .set('isActive', 'eq.true')
+      .set('order', 'createdAt.asc');
+
+    return this.http.get<any[]>(`${this.restUrl}/Team`, {
+      headers: this.getSupabaseHeaders(),
+      params,
+    });
+  }
+
+  getAdminTeamMembers() {
+    const params = new HttpParams().set('select', '*').set('order', 'createdAt.asc');
+
+    return this.http.get<any[]>(`${this.restUrl}/Team`, {
+      headers: this.authHeaders(),
+      params,
+    });
+  }
+
+  getTeamMemberById(id: string) {
+    const params = new HttpParams().set('select', '*').set('id', `eq.${id}`).set('limit', '1');
+
+    return this.http
+      .get<any[]>(`${this.restUrl}/Team`, {
+        headers: this.authHeaders(),
+        params,
+      })
+      .pipe(map((rows) => rows[0] ?? null));
+  }
+
+  createTeamMember(data: any) {
+    return this.http
+      .post<any>(`${this.restUrl}/Team`, data, {
+        headers: this.authHeaders({
+          Prefer: 'return=representation',
+        }),
+      })
+      .pipe(
+        map((rows: any) => ({
+          message: 'Team member created successfully',
+          data: Array.isArray(rows) ? rows[0] : rows,
+        })),
+      );
+  }
+
+  updateTeamMember(id: string, data: any) {
+    const params = new HttpParams().set('id', `eq.${id}`);
+
+    return this.http
+      .patch<any>(`${this.restUrl}/Team`, data, {
+        headers: this.authHeaders({
+          Prefer: 'return=representation',
+        }),
+        params,
+      })
+      .pipe(
+        map((rows: any) => ({
+          message: 'Team member updated successfully',
+          data: Array.isArray(rows) ? rows[0] : rows,
+        })),
+      );
+  }
+
+  deleteTeamMember(id: string) {
+    const params = new HttpParams().set('id', `eq.${id}`);
+
+    return this.http
+      .delete(`${this.restUrl}/Team`, {
+        headers: this.authHeaders({
+          Prefer: 'return=minimal',
+        }),
+        params,
+      })
+      .pipe(
+        map(() => ({
+          message: 'Team member deleted successfully',
+        })),
+      );
+  }
+
+  // =====================================================
   // Contact APIs
   // =====================================================
 
@@ -489,12 +575,17 @@ export class Api {
         headers: this.authHeaders(),
         params: idParams,
       }),
+      team: this.http.get<any[]>(`${this.restUrl}/Team`, {
+        headers: this.authHeaders(),
+        params: idParams,
+      }),
     }).pipe(
       map((result) => ({
         blogs: result.blogs.length,
         services: result.services.length,
         contacts: result.contacts.length,
         newsletter: result.newsletter.length,
+        team: result.team.length,
       })),
     );
   }
