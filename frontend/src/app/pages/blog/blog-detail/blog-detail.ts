@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Api } from '../../../services/api';
 
@@ -12,6 +12,7 @@ import { Api } from '../../../services/api';
 export class BlogDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private api = inject(Api);
+  private cdr = inject(ChangeDetectorRef);
 
   blog: any = null;
   loading = true;
@@ -29,6 +30,8 @@ export class BlogDetail implements OnInit {
         this.blog = blogs.find((blog) => blog.slug === slug) ?? null;
 
         this.loading = false;
+
+        this.cdr.detectChanges();
 
         setTimeout(() => {
           window.scrollTo({
