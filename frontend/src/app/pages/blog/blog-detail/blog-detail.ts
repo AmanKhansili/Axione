@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Api } from '../../../services/api';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './blog-detail.html',
   styleUrl: './blog-detail.scss',
 })

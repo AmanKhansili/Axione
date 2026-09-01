@@ -19,7 +19,7 @@
         <div class="blog-detail-meta">
           <span>
             <i class="ri-calendar-line"></i>
-            {{ blog.createdAt }}
+            {{ blog.createdAt | date: 'MMM d, yyyy, h:mm a' }}
           </span>
 
           <span>
@@ -41,10 +41,13 @@
             </div>
           }
 
-          @for (section of blog.content; track section.heading) {
+          @for (section of blog.content; track $index) {
             <div class="article-section">
-              <h2>{{ section.heading }}</h2>
-              <p>{{ section.text }}</p>
+              @if (section.heading) {
+                <h2>{{ section.heading }}</h2>
+              }
+
+              <div class="article-text" [innerHTML]="section.text"></div>
             </div>
           }
         </article>

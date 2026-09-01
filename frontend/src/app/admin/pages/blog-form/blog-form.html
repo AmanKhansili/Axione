@@ -1,49 +1,92 @@
 <section class="blog-form-page">
+  <!-- Page Header -->
   <div class="page-header">
     <div>
-      <h1>{{ isEdit ? 'Edit Blog' : 'Add Blog' }}</h1>
-      <p>Create and publish a new blog.</p>
+      <h1>
+        {{ isEdit ? 'Edit Blog' : 'Add Blog' }}
+      </h1>
+
+      <p>
+        {{
+          isEdit ? 'Update your blog content and information.' : 'Create and publish a new blog.'
+        }}
+      </p>
     </div>
   </div>
 
+  <!-- Blog Form -->
   <form (ngSubmit)="saveBlog()">
+    <!-- Basic Information -->
     <div class="form-grid">
+      <!-- Title -->
       <div class="form-group">
-        <label>Title</label>
-        <input type="text" [(ngModel)]="blog.title" name="title" (input)="generateSlug()" />
+        <label>Title *</label>
+
+        <input
+          type="text"
+          [(ngModel)]="blog.title"
+          name="title"
+          placeholder="Enter blog title"
+          (input)="generateSlug()"
+          required
+        />
       </div>
 
+      <!-- Slug -->
       <div class="form-group">
-        <label>Slug</label>
-        <input type="text" [(ngModel)]="blog.slug" name="slug" placeholder="agentic-ai" />
+        <label>Slug *</label>
+
+        <input type="text" [(ngModel)]="blog.slug" name="slug" placeholder="agentic-ai" required />
       </div>
 
+      <!-- Category -->
       <div class="form-group">
-        <label>Category</label>
+        <label>Category *</label>
+
         <input
           type="text"
           [(ngModel)]="blog.category"
           name="category"
           placeholder="Artificial Intelligence"
+          required
         />
       </div>
 
+      <!-- Author -->
       <div class="form-group">
-        <label>Author</label>
-        <input type="text" [(ngModel)]="blog.author" name="author" placeholder="Axione Solutions" />
+        <label>Author *</label>
+
+        <input
+          type="text"
+          [(ngModel)]="blog.author"
+          name="author"
+          placeholder="Axione Solutions"
+          required
+        />
       </div>
 
+      <!-- Image -->
       <div class="form-group full">
         <label>Image URL</label>
+
         <input type="text" [(ngModel)]="blog.image" name="image" placeholder="https://..." />
       </div>
 
+      <!-- Short Description -->
       <div class="form-group full">
-        <label>Short Description</label>
-        <textarea rows="4" [(ngModel)]="blog.shortDescription" name="shortDescription"></textarea>
+        <label>Short Description *</label>
+
+        <textarea
+          rows="4"
+          [(ngModel)]="blog.shortDescription"
+          name="shortDescription"
+          placeholder="Write a short description of your blog..."
+          required
+        ></textarea>
       </div>
     </div>
 
+    <!-- Publish -->
     <div class="publish">
       <label>
         <input type="checkbox" [(ngModel)]="blog.published" name="published" />
@@ -52,37 +95,61 @@
       </label>
     </div>
 
+    <!-- Content Heading -->
     <h2>Content Sections</h2>
 
+    <!-- Content Sections -->
     @for (section of blog.content; track $index) {
       <div class="content-card">
+        <!-- Section Heading -->
         <div class="form-group">
-          <label>Heading</label>
+          <label> Section Heading </label>
 
-          <input type="text" [(ngModel)]="section.heading" [name]="'heading' + $index" />
+          <input
+            type="text"
+            [(ngModel)]="section.heading"
+            [name]="'heading' + $index"
+            placeholder="Enter section heading"
+          />
         </div>
 
+        <!-- Rich Text Editor -->
         <div class="form-group">
-          <label>Content</label>
+          <label> Content </label>
 
-          <textarea rows="5" [(ngModel)]="section.text" [name]="'text' + $index"></textarea>
+          <quill-editor
+            [(ngModel)]="section.text"
+            [name]="'text' + $index"
+            [modules]="quillModules"
+            placeholder="Write your blog content..."
+          ></quill-editor>
         </div>
 
+        <!-- Remove Section -->
         @if (blog.content.length > 1) {
           <button type="button" class="remove-btn" (click)="removeSection($index)">
+            <i class="ri-delete-bin-line"></i>
+
             Remove Section
           </button>
         }
       </div>
     }
 
+    <!-- Form Buttons -->
     <div class="buttons">
-      <button type="button" class="secondary-btn" (click)="addSection()">Add Section</button>
+      <button type="button" class="secondary-btn" (click)="addSection()">
+        <i class="ri-add-line"></i>
+
+        Add Section
+      </button>
 
       <button type="submit" class="primary-btn" [disabled]="isLoading">
         @if (isLoading) {
-          Saving...
+          <span>Saving...</span>
         } @else {
+          <i class="ri-save-line"></i>
+
           {{ isEdit ? 'Update Blog' : 'Save Blog' }}
         }
       </button>

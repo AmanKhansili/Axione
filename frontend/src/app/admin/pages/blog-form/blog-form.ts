@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { QuillEditorComponent } from 'ngx-quill';
 import { Api } from '../../../services/api';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-blog-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, QuillEditorComponent],
   templateUrl: './blog-form.html',
   styleUrl: './blog-form.scss',
 })
@@ -22,6 +22,28 @@ export class BlogForm implements OnInit {
   blogId = '';
   isLoading = false;
 
+  // =====================================================
+  // Quill Editor Configuration
+  // =====================================================
+
+  quillModules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ header: [1, 2, 3, false] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ indent: '-1' }, { indent: '+1' }],
+      [{ align: [] }],
+      ['blockquote', 'code-block'],
+      ['link'],
+      [{ color: [] }, { background: [] }],
+      ['clean'],
+    ],
+  };
+
+  // =====================================================
+  // Blog Object
+  // =====================================================
+
   blog = {
     title: '',
     slug: '',
@@ -29,11 +51,14 @@ export class BlogForm implements OnInit {
     author: '',
     image: '',
     shortDescription: '',
+
     date: new Date().toLocaleDateString('en-US', {
       month: 'long',
       year: 'numeric',
     }),
+
     published: false,
+
     content: [
       {
         heading: '',
@@ -42,6 +67,10 @@ export class BlogForm implements OnInit {
     ],
   };
 
+  // =====================================================
+  // Add Content Section
+  // =====================================================
+
   addSection(): void {
     this.blog.content.push({
       heading: '',
@@ -49,13 +78,29 @@ export class BlogForm implements OnInit {
     });
   }
 
+  // =====================================================
+  // Remove Content Section
+  // =====================================================
+
   removeSection(index: number): void {
+    if (this.blog.content.length <= 1) {
+      return;
+    }
+
     this.blog.content.splice(index, 1);
   }
+
+  // =====================================================
+  // Generate ID
+  // =====================================================
 
   private generateId(): string {
     return 'cms' + crypto.randomUUID().replace(/-/g, '');
   }
+
+  // =====================================================
+  // Save Blog
+  // =====================================================
 
   saveBlog(): void {
     if (
@@ -75,14 +120,21 @@ export class BlogForm implements OnInit {
       ...(this.isEdit ? {} : { id: this.generateId() }),
 
       title: this.blog.title.trim(),
+
       slug: this.blog.slug.trim(),
+
       category: this.blog.category.trim(),
+
       author: this.blog.author.trim(),
+
       image: this.blog.image.trim(),
+
       shortDescription: this.blog.shortDescription.trim(),
 
       date: this.blog.date,
+
       published: this.blog.published,
+
       content: this.blog.content,
 
       updatedAt: now,
@@ -115,6 +167,10 @@ export class BlogForm implements OnInit {
     });
   }
 
+  // =====================================================
+  // Initialize
+  // =====================================================
+
   ngOnInit(): void {
     this.blogId = this.route.snapshot.paramMap.get('id') || '';
 
@@ -124,6 +180,10 @@ export class BlogForm implements OnInit {
     }
   }
 
+  // =====================================================
+  // Load Blog For Edit
+  // =====================================================
+
   loadBlog(): void {
     this.isLoading = true;
 
@@ -131,11 +191,43 @@ export class BlogForm implements OnInit {
       next: (response: any) => {
         if (!response) {
           this.toastr.error('Blog not found');
+
           this.router.navigate(['/admin/blogs']);
+
           return;
         }
 
-        this.blog = response;
+        this.blog = {
+          title: response.title || '',
+          slug: response.slug || '',
+          category: response.category || '',
+          author: response.author || '',
+          image: response.image || '',
+          shortDescription: response.shortDescription || '',
+
+          date:
+            response.date ||
+            new Date().toLocaleDateString('en-US', {
+              month: 'long',
+              year: 'numeric',
+            }),
+
+          published: response.published === true,
+
+          content:
+            Array.isArray(response.content) && response.content.length > 0
+              ? response.content.map((section: any) => ({
+                  heading: section.heading || '',
+                  text: section.text || '',
+                }))
+              : [
+                  {
+                    heading: '',
+                    text: '',
+                  },
+                ],
+        };
+
         this.isLoading = false;
       },
 
@@ -149,8 +241,14 @@ export class BlogForm implements OnInit {
     });
   }
 
+  // =====================================================
+  // Generate Slug
+  // =====================================================
+
   generateSlug(): void {
-    if (this.isEdit) return;
+    if (this.isEdit) {
+      return;
+    }
 
     this.blog.slug = this.blog.title
       .toLowerCase()
