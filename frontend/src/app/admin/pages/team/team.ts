@@ -47,9 +47,7 @@ export class Team implements OnInit {
 
         this.cdr.detectChanges();
 
-        this.toastr.error(
-          error?.error?.message || 'Unable to load team members'
-        );
+        this.toastr.error(error?.error?.message || 'Unable to load team members');
       },
     });
   }
@@ -63,6 +61,7 @@ export class Team implements OnInit {
         (member.designation || '').toLowerCase().includes(value) ||
         (member.email || '').toLowerCase().includes(value),
     );
+    this.cdr.detectChanges();
   }
 
   deleteTeamMember(id: string): void {
@@ -72,17 +71,11 @@ export class Team implements OnInit {
 
     this.api.deleteTeamMember(id).subscribe({
       next: (response: any) => {
-        this.toastr.success(
-          response?.message || 'Team member deleted successfully',
-        );
+        this.toastr.success(response?.message || 'Team member deleted successfully');
 
-        this.teamMembers = this.teamMembers.filter(
-          (member) => member.id !== id,
-        );
+        this.teamMembers = this.teamMembers.filter((member) => member.id !== id);
 
-        this.filteredMembers = this.filteredMembers.filter(
-          (member) => member.id !== id,
-        );
+        this.filteredMembers = this.filteredMembers.filter((member) => member.id !== id);
 
         this.cdr.detectChanges();
       },
@@ -90,10 +83,8 @@ export class Team implements OnInit {
       error: (error) => {
         console.error('Delete Team Error:', error);
 
-        this.toastr.error(
-          error?.error?.message || 'Unable to delete team member',
-        );
-      },
+        this.toastr.error(error?.error?.message || 'Unable to delete team member');
+      },  
     });
   }
 }

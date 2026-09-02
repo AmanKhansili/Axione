@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,6 +17,7 @@ export class BlogForm implements OnInit {
   private router = inject(Router);
   private toastr = inject(ToastrService);
   private route = inject(ActivatedRoute);
+  private cdr = inject(ChangeDetectorRef);
 
   isEdit = false;
   blogId = '';
@@ -229,6 +230,7 @@ export class BlogForm implements OnInit {
         };
 
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
 
       error: (error) => {
@@ -256,5 +258,8 @@ export class BlogForm implements OnInit {
       .replace(/\s+/g, '-')
       .replace(/[^\w-]/g, '')
       .replace(/-+/g, '-');
+  }
+  cancel(): void {
+    this.router.navigate(['/admin/blogs']);
   }
 }

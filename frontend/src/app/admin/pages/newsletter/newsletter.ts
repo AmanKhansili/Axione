@@ -47,6 +47,7 @@ export class Newsletter implements OnInit {
     this.filteredSubscribers = this.subscribers.filter((subscriber) =>
       subscriber.email.toLowerCase().includes(value),
     );
+    this.cdr.detectChanges();
   }
 
   deleteSubscriber(id: string) {
@@ -60,6 +61,7 @@ export class Newsletter implements OnInit {
 
         this.subscribers = this.subscribers.filter((x) => x.id !== id);
         this.filteredSubscribers = this.filteredSubscribers.filter((x) => x.id !== id);
+        this.cdr.detectChanges();
       },
       error: (error: any) => {
         this.toastr.error(error.error?.message || 'Delete failed');

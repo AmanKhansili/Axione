@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,7 @@ export class ServiceForm implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private toastr = inject(ToastrService);
+  private cdr = inject(ChangeDetectorRef);
 
   isEdit = false;
   serviceId = '';
@@ -40,6 +41,7 @@ export class ServiceForm implements OnInit {
   ngOnInit(): void {
     this.serviceId = this.route.snapshot.paramMap.get('id') || '';
     this.isEdit = !!this.serviceId;
+    this.cdr.detectChanges();
 
     if (this.isEdit) {
       this.loadService();
@@ -96,6 +98,7 @@ export class ServiceForm implements OnInit {
         this.benefitsText = this.service.benefits.join(', ');
 
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
 
       error: (error) => {

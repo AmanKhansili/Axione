@@ -7,6 +7,9 @@
         {{ isEdit ? 'Update team member information.' : 'Add a new member to your team.' }}
       </p>
     </div>
+    <button type="button" class="ghost-btn" (click)="cancel()">
+      <i class="ri-arrow-left-line"></i> Back
+    </button>
   </div>
 
   <form class="form-card" (ngSubmit)="saveMember()">

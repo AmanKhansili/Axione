@@ -55,6 +55,7 @@ export class Contacts implements OnInit {
       (contact) =>
         contact.name.toLowerCase().includes(value) || contact.email.toLowerCase().includes(value),
     );
+    this.cdr.detectChanges();
   }
 
   deleteContact(id: string) {
@@ -66,6 +67,7 @@ export class Contacts implements OnInit {
 
         this.contacts = this.contacts.filter((x) => x.id !== id);
         this.filteredContacts = this.filteredContacts.filter((x) => x.id !== id);
+        this.cdr.detectChanges();
       },
       error: (error: any) => {
         this.toastr.error(error.error.message);

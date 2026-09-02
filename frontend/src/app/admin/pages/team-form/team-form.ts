@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,7 @@ export class TeamForm implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private toastr = inject(ToastrService);
+  private cdr = inject(ChangeDetectorRef);
 
   isEdit = false;
   memberId = '';
@@ -38,6 +39,7 @@ export class TeamForm implements OnInit {
   ngOnInit(): void {
     this.memberId = this.route.snapshot.paramMap.get('id') || '';
     this.isEdit = !!this.memberId;
+    this.cdr.detectChanges();
 
     if (this.isEdit) {
       this.loadMember();
@@ -99,6 +101,7 @@ export class TeamForm implements OnInit {
         this.imagePreview = this.member.image;
 
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
 
       error: (error) => {
@@ -107,6 +110,7 @@ export class TeamForm implements OnInit {
         this.isLoading = false;
 
         this.toastr.error(error?.error?.message || 'Unable to load team member');
+        this.cdr.detectChanges();
       },
     });
   }

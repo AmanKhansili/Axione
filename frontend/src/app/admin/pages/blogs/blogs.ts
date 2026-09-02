@@ -48,6 +48,7 @@ export class Blogs implements OnInit {
       (blog) =>
         blog.title.toLowerCase().includes(value) || blog.category.toLowerCase().includes(value),
     );
+    this.cdr.detectChanges();
   }
 
   deleteBlog(id: string) {
@@ -63,6 +64,7 @@ export class Blogs implements OnInit {
 
         this.blogs = this.blogs.filter((blog) => blog.id !== id);
         this.filteredBlogs = this.filteredBlogs.filter((blog) => blog.id !== id);
+        this.cdr.detectChanges();
       },
 
       error: (error) => {
